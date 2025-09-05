@@ -1,0 +1,53 @@
+# =========================
+# Visual Studio 2010 .gitignore
+# =========================
+
+# Archivos de compilación
+bin/
+obj/
+[Bb]uild/
+Debug/
+Release/
+x64/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.obj
+*.log
+
+# Archivos de configuración de usuario
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archivos de base de datos locales
+*.mdf
+*.ldf
+
+# Archivos de publicación/paquetes
+*.Publish.xml
+*.pubxml
+*.publishproj
+PublishProfiles/
+
+# Archivos de Resharper u otras extensiones
+_ReSharper*/
+*.DotSettings.user
+
+# Archivos de test
+TestResults/
+*.testsettings
+*.vsmdi
+
+# Archivos temporales
+*.tmp
+*.bak
+*.Backup
+*.swp
+
+# Otros
+*.vssscc
+*.vspscc
+*.scc
