@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alumno.cs" />
+    <Compile Include="Curso.cs" />
     <Compile Include="Docente.cs" />
+    <Compile Include="Estado.cs" />
+    <Compile Include="EstadoType.cs" />
+    <Compile Include="Inscripcion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Usuario.cs" />
