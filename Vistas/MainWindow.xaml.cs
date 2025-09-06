@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClaseBase;
 
 namespace Vistas
 {
@@ -19,9 +20,89 @@ namespace Vistas
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Usuario> usuarios;
+        private List<Roles> roles;
         public MainWindow()
         {
             InitializeComponent();
+            InicializarDatos();
+            txtUsuario.Focus();
+        }
+
+        private void InicializarDatos() {
+            roles = new List<Roles>
+            {
+                new Roles { Rol_ID = 1, Rol_Descripcion = "Administrador" },
+                new Roles { Rol_ID = 2, Rol_Descripcion = "Docente" },
+                new Roles { Rol_ID = 3, Rol_Descripcion = "Recepcion" }
+            };
+            
+            usuarios = new List<Usuario>
+            {
+                new Usuario { Usu_ID = 1, Usu_NombreUsuario = "admin", Usu_Contraseña = "123456", Usu_ApellidoNombre = "Rodriguez, Juan Carlos", Rol_ID = 1 },
+                new Usuario { Usu_ID = 2, Usu_NombreUsuario = "docente", Usu_Contraseña = "doc123", Usu_ApellidoNombre = "Garcia, Maria Elena", Rol_ID = 2 },
+                new Usuario { Usu_ID = 3, Usu_NombreUsuario = "recepcion", Usu_Contraseña = "rec123", Usu_ApellidoNombre = "Lopez, Ana Beatriz", Rol_ID = 3 },
+            };
+
+        }
+
+        private void btnIngresar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                lblError.Text = "";
+                
+                
+                string nombreUsuario = txtUsuario.Text.Trim();
+                string contraseña = txtContraseña.Password.Trim();
+                
+               
+                if (string.IsNullOrEmpty(nombreUsuario))
+                {
+                    lblError.Text = "Por favor ingrese el nombre de usuario";
+                    txtUsuario.Focus();
+                    return;
+                }
+                
+                if (string.IsNullOrEmpty(contraseña))
+                {
+                    lblError.Text = "Por favor ingrese la contraseña";
+                    txtContraseña.Focus();
+                    return;
+                }
+                
+           
+                Usuario usuarioEncontrado = usuarios.FirstOrDefault(u => 
+                    u.Usu_NombreUsuario.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase) && 
+                    u.Usu_Contraseña == contraseña);
+                
+                if (usuarioEncontrado != null)
+                {
+                
+                    Roles rolUsuario = roles.FirstOrDefault(r => r.Rol_ID == usuarioEncontrado.Rol_ID);
+        
+                    
+                    string mensajeBienvenida = "¡Bienvenido al sistema!\n\n" +
+                                                "Usuario: " + usuarioEncontrado.Usu_ApellidoNombre + "\n" +
+                                                "Rol: " + (rolUsuario != null ? rolUsuario.Rol_Descripcion : "Sin rol asignado");;
+                    
+                    MessageBox.Show(mensajeBienvenida, "Acceso Concedido", 
+                                  MessageBoxButton.OK, MessageBoxImage.Information);
+                   
+                    this.Close();
+                }
+                else
+                {
+                    lblError.Text = "Usuario o contraseña incorrectos";
+                    txtContraseña.Clear();
+                    txtUsuario.SelectAll();
+                    txtUsuario.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al procesar el login: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
