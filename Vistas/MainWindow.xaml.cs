@@ -88,8 +88,10 @@ namespace Vistas
                     
                     MessageBox.Show(mensajeBienvenida, "Acceso Concedido", 
                                   MessageBoxButton.OK, MessageBoxImage.Information);
-                   
+                    MainMenu menu = new MainMenu();
                     this.Close();
+                    menu.Show();
+
                 }
                 else
                 {
