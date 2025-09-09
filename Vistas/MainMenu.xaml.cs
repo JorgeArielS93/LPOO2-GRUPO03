@@ -29,5 +29,23 @@ namespace Vistas
             login.Show();
             this.Close();
         }
+
+        private void MenuAlumnos_Click(object sender, RoutedEventArgs e)
+        {
+            AltaAlumno alta = new AltaAlumno();
+            alta.Show();  
+        }
+
+        private void MenuDocentes_Click(object sender, RoutedEventArgs e)
+        {
+            AltaDocente alta = new AltaDocente();
+            alta.Show();
+        }
+
+        private void MenuCursos_Click(object sender, RoutedEventArgs e)
+        {
+            AltaCurso alta = new AltaCurso();
+            alta.Show();
+        }
     }
 }
