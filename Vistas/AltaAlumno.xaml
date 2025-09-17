@@ -43,10 +43,10 @@
             <!-- Botón registro -->
             <Button Name="btnAltaAlumno" 
                     Content="REGISTRAR" 
-                    Height="40" FontSize="14" FontWeight="Bold"
-                    Background="#3498db" Foreground="White" 
-                    BorderThickness="0" Cursor="Hand"
-                    Click="btnAltaAlumno_Click" Width="158" />
+                    Height="40" 
+                    Width="158"
+                    Click="btnAltaAlumno_Click" 
+                    Style="{StaticResource ResourceKey=btnPlantillaRegistrar}" />
 
             <!-- Mensaje de error -->
             <TextBlock Name="lblError" Text="" Foreground="Red" HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12" />

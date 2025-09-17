@@ -34,6 +34,7 @@
                     
                     <MenuItem Header="_Sistema">
                         <MenuItem Header="Usuarios"    
+                                  Click="MenuUsuarios_Click"
                                   Background="#2c3e50"/>
                         <Separator/>
                         <MenuItem Header="Salir" 

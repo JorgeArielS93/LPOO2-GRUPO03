@@ -26,7 +26,6 @@ namespace Vistas
         {
             InitializeComponent();
             InicializarDatos();
-            txtUsuario.Focus();
         }
 
         private void InicializarDatos() {
@@ -51,23 +50,21 @@ namespace Vistas
             try
             {
                 lblError.Text = "";
-                
-                
-                string nombreUsuario = txtUsuario.Text.Trim();
-                string contraseña = txtContraseña.Password.Trim();
+
+
+                String nombreUsuario = login.Usuario;
+                String contraseña = login.Contraseña;
                 
                
                 if (string.IsNullOrEmpty(nombreUsuario))
                 {
                     lblError.Text = "Por favor ingrese el nombre de usuario";
-                    txtUsuario.Focus();
                     return;
                 }
                 
                 if (string.IsNullOrEmpty(contraseña))
                 {
                     lblError.Text = "Por favor ingrese la contraseña";
-                    txtContraseña.Focus();
                     return;
                 }
                 
@@ -96,9 +93,6 @@ namespace Vistas
                 else
                 {
                     lblError.Text = "Usuario o contraseña incorrectos";
-                    txtContraseña.Clear();
-                    txtUsuario.SelectAll();
-                    txtUsuario.Focus();
                 }
             }
             catch (Exception ex)

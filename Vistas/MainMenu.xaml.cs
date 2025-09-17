@@ -30,6 +30,12 @@ namespace Vistas
             this.Close();
         }
 
+        private void MenuUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            AltaUsuario alta = new AltaUsuario();
+            alta.Show();
+        }
+        
         private void MenuAlumnos_Click(object sender, RoutedEventArgs e)
         {
             AltaAlumno alta = new AltaAlumno();

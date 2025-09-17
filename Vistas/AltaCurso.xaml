@@ -69,12 +69,13 @@
             <ComboBox Name="cmbDocente" Height="28" FontSize="13" Margin="0,0,0,15"/>
 
             <!-- Botón registro -->
+            
             <Button Name="btnAltaCurso" 
                     Content="REGISTRAR" 
-                    Height="40" FontSize="14" FontWeight="Bold"
-                    Background="#3498db" Foreground="White" 
-                    BorderThickness="0" Cursor="Hand"
-                    Click="btnAltaCurso_Click" Width="158"/>
+                    Height="40" 
+                    Width="158"
+                    Click="btnAltaCurso_Click" 
+                    Style="{StaticResource ResourceKey=btnPlantillaRegistrar}" />
 
             <!-- Mensaje de error -->
             <TextBlock Name="lblError" Text="" Foreground="Red" 
