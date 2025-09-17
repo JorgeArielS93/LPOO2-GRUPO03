@@ -86,7 +86,6 @@ namespace Vistas
                     Doc_ID = cmbDocente.SelectedIndex + 1     
                 };
 
-                // Confirmación
                 MessageBoxResult result = MessageBox.Show(
                     "Curso creado:\n" +
                     "Nombre: " + curso.Cur_Nombre + "\n" +

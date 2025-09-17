@@ -27,32 +27,33 @@
                 CornerRadius="10" Margin="40,0,40,0"
                 BorderBrush="#bdc3c7" BorderThickness="1" Grid.Row="1"></Border>
         <StackPanel VerticalAlignment="Center" Margin="90,20,102,50" Grid.Row="1">
-            <TextBlock Text="Alta Docente" FontSize="17" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#2c3e50" Margin="0,0,0,30" />
+            <TextBlock Text="Alta Docente" FontSize="17" FontWeight="Bold" 
+               HorizontalAlignment="Center" Foreground="#2c3e50" Margin="0,0,0,30" />
+
             <!-- Campo Dni -->
             <TextBlock Text="DNI:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtDniDocente" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,15" />
+            <TextBox Name="txtDniDocente" Style="{StaticResource tbAltaDocente}"/>
+
             <!-- Campo Nombre -->
             <TextBlock Text="Nombre:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtNombreDocente" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,15" />
+            <TextBox Name="txtNombreDocente" Style="{StaticResource tbAltaDocente}"/>
+
             <!-- Campo Apellido -->
             <TextBlock Text="Apellido:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtApellidoDocente" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,15" />
+            <TextBox Name="txtApellidoDocente" Style="{StaticResource tbAltaDocente}"/>
+
             <!-- Campo Email -->
             <TextBlock Text="Email:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtEmailDocente" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,20" Width="684" />
+            <TextBox Name="txtEmailDocente" Width="684" Style="{StaticResource tbAltaDocente}"/>
+
             <!-- Botón registro -->
-            <Button Name="btnAltaDocente" 
-                    Content="REGISTRAR" 
-                    Height="40" FontSize="14" FontWeight="Bold"
-                    Background="#3498db" Foreground="White" 
-                    BorderThickness="0" Cursor="Hand"
-                    Click="btnAltaDocente_Click" Width="158" />
-
+            <Button Name="btnAltaDocente" Content="REGISTRAR" Click="btnAltaDocente_Click" Style="{StaticResource btnAltaDocente}" />
+ 
             <!-- Mensaje de error -->
-            <TextBlock Name="lblError" Text="" Foreground="Red" HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12" />
-
-
+            <TextBlock Name="lblError" Text="" Foreground="Red" 
+               HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12" />
         </StackPanel>
+
 
         <!-- Footer -->
         <TextBlock Grid.Row="2" 
