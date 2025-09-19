@@ -4,6 +4,8 @@
         Title="AltaCurso" Height="840" Width="868"
         Loaded="AltaCurso_Loaded"
         WindowStartupLocation="CenterScreen">
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AltaAlumno" Height="660" Width="848"
         WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
