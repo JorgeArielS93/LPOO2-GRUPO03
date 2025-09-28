@@ -23,8 +23,8 @@ x64/
 *.sln.docstates
 
 # Archivos de base de datos locales
-*.mdf
-*.ldf
+#*.mdf
+#*.ldf
 
 # Archivos de publicación/paquetes
 *.Publish.xml
