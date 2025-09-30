@@ -58,6 +58,11 @@
     <Compile Include="AltaUsuario.xaml.cs">
       <DependentUpon>AltaUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="institutoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
@@ -77,6 +82,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GrillaCursos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +102,9 @@
     </Compile>
     <Compile Include="AltaDocente.xaml.cs">
       <DependentUpon>AltaDocente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GrillaCursos.xaml.cs">
+      <DependentUpon>GrillaCursos.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -136,6 +148,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="institutoDataSet.xsc">
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="institutoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>institutoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="institutoDataSet.xss">
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

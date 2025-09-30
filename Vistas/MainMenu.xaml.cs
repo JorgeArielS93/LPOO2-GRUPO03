@@ -53,5 +53,11 @@ namespace Vistas
             AltaCurso alta = new AltaCurso();
             alta.Show();
         }
+
+        private void MenuListaCursos_Click(object sender, RoutedEventArgs e)
+        {
+            GrillaCursos grilla = new GrillaCursos();
+            grilla.Show();
+        }
     }
 }
