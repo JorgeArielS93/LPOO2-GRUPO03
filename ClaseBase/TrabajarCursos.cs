@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
+
 namespace ClaseBase
 {
     public class TrabajarCursos
@@ -52,6 +53,47 @@ namespace ClaseBase
             
             return tabla;
         }
-        
+
+
+        private static string cadenaConexion =
+            @"Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Facultad\LPOO2\Proyecto-LPOOII\LPOO2-GRUPO03\instituto.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True";
+
+        public static void InsertarCurso(Curso curso)
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+
+                curso.Cur_ID = Guid.NewGuid().ToString("N").Substring(0, 10);
+
+                string sql = @"INSERT INTO Curso 
+               (Cur_ID, Cur_Nombre, Cur_Descripcion, Cur_Cupo, Cur_FechaInicio, Cur_FechaFin, Est_ID, Doc_ID)
+               VALUES (@id, @nombre, @desc, @cupo, @fechaInicio, @fechaFin, @estado, @docente)";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", curso.Cur_ID);
+                cmd.Parameters.AddWithValue("@nombre", curso.Cur_Nombre);
+                cmd.Parameters.AddWithValue("@desc", curso.Cur_Descripcion ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@cupo", curso.Cur_Cupo);
+                cmd.Parameters.AddWithValue("@fechaInicio", curso.Cur_FechaInicio);
+                cmd.Parameters.AddWithValue("@fechaFin", curso.Cur_FechaFin);
+                cmd.Parameters.AddWithValue("@estado", curso.Est_ID);
+                cmd.Parameters.AddWithValue("@docente", curso.Doc_ID);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+        /*
+        public static DataTable TraerCursos()
+        {
+            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            {
+                string sql = "SELECT * FROM Curso";
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }*/
     }
 }
