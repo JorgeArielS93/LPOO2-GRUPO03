@@ -54,13 +54,9 @@ namespace ClaseBase
             return tabla;
         }
 
-
-        private static string cadenaConexion =
-            @"Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Facultad\LPOO2\Proyecto-LPOOII\LPOO2-GRUPO03\instituto.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True";
-
         public static void InsertarCurso(Curso curso)
         {
-            using (SqlConnection conn = new SqlConnection(cadenaConexion))
+            using (SqlConnection conn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
             {
 
                 curso.Cur_ID = Guid.NewGuid().ToString("N").Substring(0, 10);

@@ -115,10 +115,19 @@
                     Width="200"
                     Style="{StaticResource ResourceKey=btnPlantillaRegistrar}"
                     Click="btnModificarAlumno_Click" />
+                    <TextBlock Name="lblErrorMod" 
+                       Foreground="Red" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,15,0,0" FontSize="12"
+                       DataContext="{x:Null}" Width="229" />
 
-            <TextBlock Name="lblErrorMod" Text="" Foreground="Red" HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12" />
         </StackPanel>
 
+        <TextBlock Grid.Row="2" Name="lblError" 
+                       Foreground="Red" 
+                       HorizontalAlignment="Center" 
+                       Margin="260,0,231,0" FontSize="12"
+                       DataContext="{x:Null}" Width="242" />
         <TextBlock Grid.Row="2" 
                   Text="© 2025 - Laboratorio de Programación Orientada a Objetos II"
                   HorizontalAlignment="Center" VerticalAlignment="Center"
