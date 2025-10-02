@@ -1,8 +1,13 @@
 ﻿<Window x:Class="Vistas.AltaAlumno"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:svc="clr-namespace:ClaseBase;assembly=ClaseBase"
         Title="AltaAlumno" Height="660" Width="848"
         WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <svc:Alumno />
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -10,7 +15,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-
 
         <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
             <StackPanel VerticalAlignment="Center">
@@ -23,36 +27,61 @@
             </StackPanel>
         </Border>
 
-        <!-- Formulario de Alta Alumno -->
         <Border Background="White" 
                 CornerRadius="10" Margin="40,0,40,0"
-                BorderBrush="#bdc3c7" BorderThickness="1" Grid.Row="1"></Border>
+                BorderBrush="#bdc3c7" BorderThickness="1" Grid.Row="1"/>
+
         <StackPanel VerticalAlignment="Center" Margin="90,20,102,50" Grid.Row="1">
-            <TextBlock Text="Alta Alumno" FontSize="17" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#2c3e50" Margin="0,0,0,30" />
-            <!-- Campo Dni -->
+            <TextBlock Text="Alta Alumno" 
+                       FontSize="17" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Foreground="#2c3e50" Margin="0,0,0,30" />
+
             <TextBlock Text="DNI:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtDniAlumno" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,15" />
-            <!-- Campo Nombre -->
+            <TextBox Name="txtDniAlumno"
+                     Height="35" FontSize="13"
+                     Style="{StaticResource EstiloError}"
+                     Text="{Binding Alu_DNI, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    ValidatesOnExceptions=True, 
+                                    ValidatesOnDataErrors=True}" />
+
             <TextBlock Text="Nombre:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtNombreAlumno" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,15" />
-            <!-- Campo Apellido -->
+            <TextBox Name="txtNombreAlumno"
+                     Height="35" FontSize="13"
+                     Style="{StaticResource EstiloError}"
+                     Text="{Binding Alu_Nombre, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    ValidatesOnExceptions=True, 
+                                    ValidatesOnDataErrors=True}" />
+
             <TextBlock Text="Apellido:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtApellidoAlumno" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,15" />
-            <!-- Campo Email -->
+            <TextBox Name="txtApellidoAlumno"
+                     Height="35" FontSize="13"
+                     Style="{StaticResource EstiloError}"
+                     Text="{Binding Alu_Apellido, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    ValidatesOnExceptions=True, 
+                                    ValidatesOnDataErrors=True}" />
+
             <TextBlock Text="Email:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
-            <TextBox Name="txtEmailAlumno" Height="35" FontSize="13" BorderBrush="#95a5a6" BorderThickness="1" Padding="10,8" Margin="0,0,0,20" Width="684" />
-            <!-- Botón registro -->
+            <TextBox Name="txtEmailAlumno"
+                     Height="35" FontSize="13"
+                     Style="{StaticResource EstiloError}"
+                     Text="{Binding Alu_Email, 
+                                    UpdateSourceTrigger=PropertyChanged, 
+                                    ValidatesOnExceptions=True, 
+                                    ValidatesOnDataErrors=True}" />
+
             <Button Name="btnAltaAlumno" 
                     Content="REGISTRAR" 
-                    Height="40" 
-                    Width="158"
-                    Click="btnAltaAlumno_Click" 
-                    Style="{StaticResource ResourceKey=btnPlantillaRegistrar}" />
+                    Height="40" Width="158"
+                    Style="{StaticResource btnPlantillaRegistrar}"
+                    Click="btnAltaAlumno_Click" />
 
-            <!-- Mensaje de error -->
-            <TextBlock Name="lblError" Text="" Foreground="Red" HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12" />
-
-           
+            <TextBlock Name="lblError" 
+                       Foreground="Red" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,15,0,0" FontSize="12" />
         </StackPanel>
 
         <!-- Footer -->
@@ -60,6 +89,5 @@
                   Text="© 2025 - Laboratorio de Programación Orientada a Objetos II"
                   HorizontalAlignment="Center" VerticalAlignment="Center"
                   FontSize="10" Foreground="#7f8c8d"/>
-
     </Grid>
 </Window>

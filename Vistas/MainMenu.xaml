@@ -53,8 +53,12 @@
                         <MenuItem Header="Docentes"   
                                   Click="MenuDocentes_Click"
                                   Background="#2c3e50"/>
-                        <MenuItem Header="Alumnos"
-                                  Click="MenuAlumnos_Click"
+                        <Separator/>
+                        <MenuItem Header="Alta Alumno"
+                                  Click="MenuAltaAlumno_Click"
+                                  Background="#2c3e50"/>
+                        <MenuItem Header="Modificar Alumno"
+                                  Click="MenuModificarAlumno_Click"
                                   Background="#2c3e50"/>
                     </MenuItem>
 

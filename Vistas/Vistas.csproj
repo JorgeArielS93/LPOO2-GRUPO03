@@ -67,8 +67,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>institutoDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ModificarAlumno.xaml.cs">
+      <DependentUpon>ModificarAlumno.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ValidarAlumno.xaml.cs">
+      <DependentUpon>ValidarAlumno.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlElement.cs" />
     <Page Include="AltaAlumno.xaml">
@@ -126,6 +132,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModificarAlumno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Plantillas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\LoginUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ValidarAlumno.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

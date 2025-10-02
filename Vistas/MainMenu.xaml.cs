@@ -36,10 +36,16 @@ namespace Vistas
             alta.Show();
         }
         
-        private void MenuAlumnos_Click(object sender, RoutedEventArgs e)
+        private void MenuAltaAlumno_Click(object sender, RoutedEventArgs e)
         {
             AltaAlumno alta = new AltaAlumno();
             alta.Show();  
+        }
+
+        private void MenuModificarAlumno_Click(object sender, RoutedEventArgs e)
+        {
+            ModificarAlumno modificar = new ModificarAlumno();
+            modificar.Show();
         }
 
         private void MenuDocentes_Click(object sender, RoutedEventArgs e)

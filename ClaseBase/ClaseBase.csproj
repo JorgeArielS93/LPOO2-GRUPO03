@@ -54,6 +54,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs" />
+    <Compile Include="TrabajarAlumnos.cs" />
     <Compile Include="TrabajarCursos.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
