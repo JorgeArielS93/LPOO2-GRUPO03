@@ -63,40 +63,50 @@ namespace Vistas
                     return;
                 }
 
-
                 Alumno alumno = new Alumno
                 {
-                    Alu_DNI = txtDniAlumno.Text,
-                    Alu_Apellido = txtApellidoAlumno.Text,
-                    Alu_Nombre = txtNombreAlumno.Text,
-                    Alu_Email = txtEmailAlumno.Text
+                    Alu_DNI = dniAlumno,
+                    Alu_Apellido = apellidoAlumno,
+                    Alu_Nombre = nombreAlumno,
+                    Alu_Email = emailAlumno
                 };
 
-                 
-                     MessageBoxResult result = MessageBox.Show(
-                                        "Alumno creado:\n" +
-                                        "DNI: " + alumno.Alu_DNI + "\n" +
-                                        "Apellido: " + alumno.Alu_Apellido + "\n" +
-                                        "Nombre: " + alumno.Alu_Nombre + "\n" +
-                                        "Email: " + alumno.Alu_Email + "\n\n" +
-                                        "¿Desea confirmar el registro?",
-                                        "Confirmación de Registro",
-                                        MessageBoxButton.OKCancel,
-                                        MessageBoxImage.Question
-                    );
+                MessageBoxResult result = MessageBox.Show(
+                    "Alumno a crear:\n" +
+                    "DNI: " + alumno.Alu_DNI + "\n" +
+                    "Apellido: " + alumno.Alu_Apellido + "\n" +
+                    "Nombre: " + alumno.Alu_Nombre + "\n" +
+                    "Email: " + alumno.Alu_Email + "\n\n" +
+                    "¿Desea confirmar el registro?",
+                    "Confirmación de Registro",
+                    MessageBoxButton.OKCancel,
+                    MessageBoxImage.Question
+                );
 
-                    if (result == MessageBoxResult.OK)
+                if (result == MessageBoxResult.OK)
+                {
+                    bool registrado = TrabajarAlumnos.AltaAlumno(alumno);
+
+                    if (registrado)
                     {
                         MessageBox.Show("Alumno registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        txtDniAlumno.Text = "";
+                        txtApellidoAlumno.Text = "";
+                        txtNombreAlumno.Text = "";
+                        txtEmailAlumno.Text = "";
                     }
-
-
+                    else
+                    {
+                        MessageBox.Show("No se pudo registrar el alumno.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar alumno:  " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error al registrar alumno: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
    }
 }
