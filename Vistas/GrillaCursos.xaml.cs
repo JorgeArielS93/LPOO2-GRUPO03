@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
+using System.Data.SqlClient;
 using ClaseBase;
 
 namespace Vistas
@@ -82,5 +84,6 @@ namespace Vistas
             Dispatcher.BeginInvoke(new Action(() => ActualizarContador()), 
                                  System.Windows.Threading.DispatcherPriority.Background);
         }
+
     }
 }
