@@ -58,6 +58,10 @@
     <Compile Include="AltaUsuario.xaml.cs">
       <DependentUpon>AltaUsuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConversorDeEstados.cs" />
+    <Compile Include="EstadosDeCursos.xaml.cs">
+      <DependentUpon>EstadosDeCursos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="institutoDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,6 +70,7 @@
     <Compile Include="UserControls\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XmlElement.cs" />
     <Page Include="AltaAlumno.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -79,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AltaUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EstadosDeCursos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +180,11 @@
       <Project>{688ACA11-E427-49F4-9E9B-0D0BC41C9FC8}</Project>
       <Name>ClaseBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Estados.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

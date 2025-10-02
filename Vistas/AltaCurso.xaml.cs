@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
+
 using ClaseBase;
 
 namespace Vistas
@@ -75,6 +77,12 @@ namespace Vistas
                     return;
                 }
 
+                int estadoId = int.Parse(cmbEstadoCurso.SelectedValue.ToString());
+
+                XmlElement estadoSeleccionado = (XmlElement)cmbEstadoCurso.SelectedItem;
+                int estId = int.Parse(estadoSeleccionado.GetAttribute("key"));
+                string estNombre = estadoSeleccionado.InnerText;
+
                 Curso curso = new Curso
                 {
                     Cur_Nombre = txtNombreCurso.Text,
@@ -82,9 +90,10 @@ namespace Vistas
                     Cur_Cupo = int.Parse(txtCupoCurso.Text),
                     Cur_FechaInicio = FechaInicio.SelectedDate ?? DateTime.MinValue,
                     Cur_FechaFin = FechaFin.SelectedDate ?? DateTime.MinValue,
-                    Est_ID = cmbEstadoCurso.SelectedIndex + 1, 
+                    Est_ID = estId, 
                     Doc_ID = cmbDocente.SelectedIndex + 1     
                 };
+
 
                 MessageBoxResult result = MessageBox.Show(
                     "Curso creado:\n" +
@@ -93,7 +102,7 @@ namespace Vistas
                     "Cupo: " + curso.Cur_Cupo + "\n" +
                     "Fecha de inicio: " + curso.Cur_FechaInicio.ToShortDateString() + "\n" +
                     "Fecha de finalizacion: " + curso.Cur_FechaFin.ToShortDateString() + "\n" +
-                    "Estado: " + ((ComboBoxItem)cmbEstadoCurso.SelectedItem).Content + "\n" +
+                    "Estado: " + estNombre + "\n" +
                     "Docente: " + ((Docente)cmbDocente.SelectedItem).Doc_Nombre + "\n\n" +
                     "¿Desea confirmar el registro?",
                     "Confirmación de Registro",
@@ -104,8 +113,12 @@ namespace Vistas
                 
                 if (result == MessageBoxResult.OK)
                 {
+
+                    TrabajarCursos.InsertarCurso(curso);
                     MessageBox.Show("Curso registrado correctamente.", "Éxito", 
                     MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    
                 }
             }
             catch (Exception ex)
