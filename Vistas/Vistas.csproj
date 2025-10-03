@@ -55,10 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resources\ConversorDeEstados.cs" />
     <Compile Include="Usuario\AltaUsuario.xaml.cs">
       <DependentUpon>AltaUsuario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Curso\ConversorDeEstados.cs" />
     <Compile Include="Curso\EstadosDeCursos.xaml.cs">
       <DependentUpon>EstadosDeCursos.xaml</DependentUpon>
     </Compile>
@@ -196,9 +196,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Curso\Estados.xml">
+    <Content Include="Resources\Estados.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

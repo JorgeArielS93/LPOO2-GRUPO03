@@ -8,6 +8,6 @@ namespace ClaseBase
     public class EstadoType
     {
         public int Esty_ID { get; set; }
-        public string Esty_Nombre { get; set; } //Tiene que ser Curso o Inscripcion
+        public string Esty_Nombre { get; set; } //Curso o Inscripcion
     }
 }
