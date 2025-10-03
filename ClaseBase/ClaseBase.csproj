@@ -41,22 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumno.cs" />
-    <Compile Include="Curso.cs" />
-    <Compile Include="Docente.cs" />
-    <Compile Include="Estado.cs" />
-    <Compile Include="EstadoType.cs" />
-    <Compile Include="Inscripcion.cs" />
+    <Compile Include="Entidades\Alumno.cs" />
+    <Compile Include="Entidades\Curso.cs" />
+    <Compile Include="Entidades\Docente.cs" />
+    <Compile Include="Entidades\Estado.cs" />
+    <Compile Include="Entidades\EstadoType.cs" />
+    <Compile Include="Entidades\Inscripcion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Roles.cs" />
-    <Compile Include="TrabajarAlumnos.cs" />
-    <Compile Include="TrabajarCursos.cs" />
-    <Compile Include="Usuario.cs" />
+    <Compile Include="Entidades\Roles.cs" />
+    <Compile Include="Servicios\TrabajarAlumnos.cs" />
+    <Compile Include="Servicios\TrabajarCursos.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
