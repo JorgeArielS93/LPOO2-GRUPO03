@@ -10,7 +10,7 @@ namespace ClaseBase
 {
     public class TrabajarCursos
     {
-        
+        // Traer todos los Cursos
         public DataTable TraerCursos()
         {
             DataTable tabla = new DataTable();
@@ -54,19 +54,16 @@ namespace ClaseBase
             return tabla;
         }
 
+        // Alta de un nuevo curso
         public static void InsertarCurso(Curso curso)
         {
             using (SqlConnection conn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
             {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "INSERT INTO Curso (Cur_Nombre, Cur_Descripcion, Cur_Cupo, Cur_FechaInicio, Cur_FechaFin, Est_ID, Doc_ID) " +
+                    "VALUES (@nombre, @desc, @cupo, @fechaInicio, @fechaFin, @estado, @docente)", conn);
 
-                curso.Cur_ID = Guid.NewGuid().ToString("N").Substring(0, 10);
-
-                string sql = @"INSERT INTO Curso 
-               (Cur_ID, Cur_Nombre, Cur_Descripcion, Cur_Cupo, Cur_FechaInicio, Cur_FechaFin, Est_ID, Doc_ID)
-               VALUES (@id, @nombre, @desc, @cupo, @fechaInicio, @fechaFin, @estado, @docente)";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@id", curso.Cur_ID);
                 cmd.Parameters.AddWithValue("@nombre", curso.Cur_Nombre);
                 cmd.Parameters.AddWithValue("@desc", curso.Cur_Descripcion ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@cupo", curso.Cur_Cupo);
@@ -75,8 +72,7 @@ namespace ClaseBase
                 cmd.Parameters.AddWithValue("@estado", curso.Est_ID);
                 cmd.Parameters.AddWithValue("@docente", curso.Doc_ID);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                int filas = cmd.ExecuteNonQuery();
             }
         }
         /*

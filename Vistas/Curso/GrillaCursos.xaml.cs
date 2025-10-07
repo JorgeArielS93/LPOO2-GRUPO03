@@ -11,9 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data;
-using System.Data.SqlClient;
-using ClaseBase;
 
 namespace Vistas
 {
@@ -32,7 +29,6 @@ namespace Vistas
         {
             try
             {
-                // Obtener el ObjectDataProvider
                 ObjectDataProvider provider = (ObjectDataProvider)FindResource("list_cursos");
                 if (provider != null && provider.Data != null)
                 {
@@ -56,7 +52,6 @@ namespace Vistas
         {
             try
             {
-                // Refrescar el ObjectDataProvider
                 ObjectDataProvider provider = (ObjectDataProvider)FindResource("list_cursos");
                 if (provider != null)
                 {
@@ -80,7 +75,6 @@ namespace Vistas
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Dar tiempo para que se carguen los datos y luego actualizar contador
             Dispatcher.BeginInvoke(new Action(() => ActualizarContador()), 
                                  System.Windows.Threading.DispatcherPriority.Background);
         }

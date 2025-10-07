@@ -57,6 +57,8 @@
     <Compile Include="Servicios\TrabajarAlumnos.cs" />
     <Compile Include="Servicios\TrabajarCursos.cs" />
     <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Servicios\TrabajarDocentes.cs" />
+    <Compile Include="Servicios\TrabajarUsuarios.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

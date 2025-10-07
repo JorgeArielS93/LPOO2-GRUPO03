@@ -28,16 +28,33 @@ namespace Vistas
 
         private void AltaCurso_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Docente> docentes = new List<Docente>
-            {
-                new Docente { Doc_ID = 1, Doc_Nombre = "Juan Pérez" },
-                new Docente { Doc_ID = 2, Doc_Nombre = "Fabiana" },
-            };
-
-            cmbDocente.ItemsSource = docentes;
-            cmbDocente.DisplayMemberPath = "Doc_Nombre"; 
-            cmbDocente.SelectedValuePath = "Doc_ID";    
+            cargar_docentes(); 
         }
+
+        private void cargar_docentes()
+        {
+            try
+            {
+                List<Docente> docentes = TrabajarDocente.TraerDocentes();
+
+                foreach (var d in docentes)
+                {
+                    d.Doc_Nombre = d.Doc_Apellido + ", " + d.Doc_Nombre;
+                }
+
+                cmbDocente.ItemsSource = docentes;
+                cmbDocente.DisplayMemberPath = "Doc_Nombre";   
+                cmbDocente.SelectedValuePath = "Doc_ID";      
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los docentes: " + ex.Message,
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+
 
         private void btnAltaCurso_Click(object sender, RoutedEventArgs e)
         {
@@ -90,8 +107,8 @@ namespace Vistas
                     Cur_Cupo = int.Parse(txtCupoCurso.Text),
                     Cur_FechaInicio = FechaInicio.SelectedDate ?? DateTime.MinValue,
                     Cur_FechaFin = FechaFin.SelectedDate ?? DateTime.MinValue,
-                    Est_ID = estId, 
-                    Doc_ID = cmbDocente.SelectedIndex + 1     
+                    Est_ID = estId,
+                    Doc_ID = (int)cmbDocente.SelectedValue
                 };
 
 
