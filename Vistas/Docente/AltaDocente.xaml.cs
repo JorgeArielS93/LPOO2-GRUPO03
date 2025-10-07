@@ -88,7 +88,20 @@ namespace Vistas
 
                 if (result == MessageBoxResult.OK)
                 {
-                    MessageBox.Show("Docente registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    bool registrado = TrabajarDocente.AltaDocente(docente);
+
+                    if (registrado)
+                    {
+                        MessageBox.Show("Docente registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        txtDniDocente.Text = "";
+                        txtApellidoDocente.Text = "";
+                        txtNombreDocente.Text = "";
+                        txtEmailDocente.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo registrar el docente.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
 
 

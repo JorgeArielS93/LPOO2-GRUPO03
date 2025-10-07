@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClaseBase;
+using ClaseBase.Servicios;
 
 namespace Vistas
 {
@@ -20,7 +21,6 @@ namespace Vistas
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Usuario> usuarios;
         private List<Roles> roles;
         public MainWindow()
         {
@@ -35,13 +35,6 @@ namespace Vistas
                 new Roles { Rol_ID = 2, Rol_Descripcion = "Docente" },
                 new Roles { Rol_ID = 3, Rol_Descripcion = "Recepcion" }
             };
-            
-            usuarios = new List<Usuario>
-            {
-                new Usuario { Usu_ID = 1, Usu_NombreUsuario = "admin", Usu_Contraseña = "123456", Usu_ApellidoNombre = "Rodriguez, Juan Carlos", Rol_ID = 1 },
-                new Usuario { Usu_ID = 2, Usu_NombreUsuario = "docente", Usu_Contraseña = "doc123", Usu_ApellidoNombre = "Garcia, Maria Elena", Rol_ID = 2 },
-                new Usuario { Usu_ID = 3, Usu_NombreUsuario = "recepcion", Usu_Contraseña = "rec123", Usu_ApellidoNombre = "Lopez, Ana Beatriz", Rol_ID = 3 },
-            };
 
         }
 
@@ -51,44 +44,37 @@ namespace Vistas
             {
                 lblError.Text = "";
 
+                string nombreUsuario = login.Usuario;
+                string contraseña = login.Contraseña;
 
-                String nombreUsuario = login.Usuario;
-                String contraseña = login.Contraseña;
-                
-               
                 if (string.IsNullOrEmpty(nombreUsuario))
                 {
                     lblError.Text = "Por favor ingrese el nombre de usuario";
                     return;
                 }
-                
+
                 if (string.IsNullOrEmpty(contraseña))
                 {
                     lblError.Text = "Por favor ingrese la contraseña";
                     return;
                 }
-                
-           
-                Usuario usuarioEncontrado = usuarios.FirstOrDefault(u => 
-                    u.Usu_NombreUsuario.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase) && 
-                    u.Usu_Contraseña == contraseña);
-                
+
+                Usuario usuarioEncontrado = TrabajarUsuarios.AutenticarUsuario(nombreUsuario, contraseña);
+
                 if (usuarioEncontrado != null)
                 {
-                
                     Roles rolUsuario = roles.FirstOrDefault(r => r.Rol_ID == usuarioEncontrado.Rol_ID);
-        
-                    
+
                     string mensajeBienvenida = "¡Bienvenido al sistema!\n\n" +
-                                                "Usuario: " + usuarioEncontrado.Usu_ApellidoNombre + "\n" +
-                                                "Rol: " + (rolUsuario != null ? rolUsuario.Rol_Descripcion : "Sin rol asignado");;
-                    
-                    MessageBox.Show(mensajeBienvenida, "Acceso Concedido", 
-                                  MessageBoxButton.OK, MessageBoxImage.Information);
+                                               "Usuario: " + usuarioEncontrado.Usu_ApellidoNombre + "\n" +
+                                               "Rol: " + (rolUsuario != null ? rolUsuario.Rol_Descripcion : "Sin rol asignado");
+
+                    MessageBox.Show(mensajeBienvenida, "Acceso Concedido",
+                                    MessageBoxButton.OK, MessageBoxImage.Information);
+
                     MainMenu menu = new MainMenu();
                     this.Close();
                     menu.Show();
-
                 }
                 else
                 {
@@ -97,8 +83,10 @@ namespace Vistas
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al procesar el login: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error al procesar el login: " + ex.Message,
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

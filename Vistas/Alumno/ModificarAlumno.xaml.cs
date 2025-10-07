@@ -105,7 +105,6 @@ namespace Vistas
                 TrabajarAlumnos.ModificarAlumno(alumno);
                 MessageBox.Show("Alumno modificado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Limpiar campos
                 txtIdAlumnoMod.Text = "";
                 txtDniAlumnoMod.Text = "";
                 txtApellidoAlumnoMod.Text = "";

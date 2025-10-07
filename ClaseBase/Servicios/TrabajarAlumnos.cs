@@ -8,6 +8,7 @@ namespace ClaseBase
 {
     public class TrabajarAlumnos
     {
+        // Traer un Alumno por ID
         public static Alumno TraerAlumno(int id)
         {
             Alumno alu = null;
@@ -34,6 +35,7 @@ namespace ClaseBase
             return alu;
         }
 
+        // Modifica un ALumno
         public static void ModificarAlumno(Alumno alu)
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
@@ -75,6 +77,7 @@ namespace ClaseBase
             }
         }
 
+        // Alta de un nuevo Alumno
         public static bool AltaAlumno(Alumno nuevoAlumno)
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
