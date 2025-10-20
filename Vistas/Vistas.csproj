@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="institutoDataSet.cs">
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Resources\ConversorDeEstados.cs" />
     <Compile Include="Usuario\AltaUsuario.xaml.cs">
       <DependentUpon>AltaUsuario.xaml</DependentUpon>

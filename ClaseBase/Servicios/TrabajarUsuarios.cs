@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections.ObjectModel;
 
 namespace ClaseBase.Servicios
 {
@@ -79,6 +80,48 @@ namespace ClaseBase.Servicios
             cn.Close();
             return null;
 
+        }
+
+        // Traer todos los Usuarios
+        public static ObservableCollection<Usuario> TraerUsuarios()
+        {
+            // Creamos la colección que devolverá el método 
+            ObservableCollection<Usuario> listaUsuarios = new ObservableCollection<Usuario>();
+            
+            // Usamos la cadena de conexión de la configuración del proyecto 
+            SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto);
+            SqlCommand cmd = new SqlCommand();
+            
+            cmd.CommandText = "SELECT * FROM Usuario";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cn;
+
+            cn.Open();
+            
+            // Usamos SqlDataReader, similar a tu método AutenticarUsuario
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            // Leemos fila por fila
+            while (dr.Read())
+            {
+                // Creamos un objeto Usuario por cada fila
+                Usuario oUsuario = new Usuario
+                {
+                    Usu_ID = Convert.ToInt32(dr["Usu_ID"]),
+                    Usu_NombreUsuario = dr["Usu_NombreUsuario"].ToString(),
+                    Usu_Contraseña = dr["Usu_Contraseña"].ToString(),
+                    Usu_ApellidoNombre = dr["Usu_ApellidoNombre"].ToString(),
+                    Rol_ID = Convert.ToInt32(dr["Rol_ID"])
+                };
+
+                // Añadimos el usuario a la colección 
+                listaUsuarios.Add(oUsuario);
+            }
+
+            cn.Close();
+            
+            // Retornamos la lista 
+            return listaUsuarios;
         }
     }
 }
