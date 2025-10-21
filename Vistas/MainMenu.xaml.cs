@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Vistas.Usuarios;
 
 namespace Vistas
 {
@@ -30,6 +31,11 @@ namespace Vistas
             this.Close();
         }
 
+        private void ABMUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            ABMUsuarios ventanaABM = new ABMUsuarios();
+            ventanaABM.Show();
+        }
         private void MenuUsuarios_Click(object sender, RoutedEventArgs e)
         {
             AltaUsuario alta = new AltaUsuario();

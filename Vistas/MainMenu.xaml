@@ -33,7 +33,11 @@
                       Margin="0,0,0,20">
                     
                     <MenuItem Header="_Sistema">
-                        <MenuItem Header="Usuarios"    
+                        <MenuItem Header="Usuarios"
+                                  Click="ABMUsuarios_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
+                        <MenuItem Header="Alta usuarios"    
                                   Click="MenuUsuarios_Click"
                                   Background="#2c3e50"/>
                         <Separator/>
