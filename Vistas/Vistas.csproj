@@ -80,6 +80,9 @@
     <Compile Include="UserControls\ValidarAlumno.xaml.cs">
       <DependentUpon>ValidarAlumno.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Usuario\ListadoUsuarios.xaml.cs">
+      <DependentUpon>ListadoUsuarios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XmlElement.cs" />
     <Page Include="Alumno\AltaAlumno.xaml">
       <SubType>Designer</SubType>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ValidarAlumno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuario\ListadoUsuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

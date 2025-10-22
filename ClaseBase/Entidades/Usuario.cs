@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.ComponentModel; // 1. Namespace necesario para INotifyPropertyChanged 
+using System.ComponentModel; 
 
 namespace ClaseBase
 {
@@ -15,7 +15,7 @@ namespace ClaseBase
             set
             {
                 usu_ID = value;
-                Notificador("Usu_ID"); //Se notifica el cambio
+                Notificador("Usu_ID"); 
             }
         }
 
@@ -48,7 +48,7 @@ namespace ClaseBase
             set
             {
                 usu_ApellidoNombre = value;
-                Notificador("Usu_ApellidoNombre"); //Se notifica el cambio
+                Notificador("Usu_ApellidoNombre"); 
             }
         }
 
@@ -59,8 +59,8 @@ namespace ClaseBase
             set
             {
                 _rol_ID = value;
-                base.Rol_ID = value; // Opcional: mantener sincronizada la propiedad base
-                Notificador("Rol_ID"); // 4. Se notifica el cambio
+                base.Rol_ID = value; 
+                Notificador("Rol_ID"); 
             }
         }
 

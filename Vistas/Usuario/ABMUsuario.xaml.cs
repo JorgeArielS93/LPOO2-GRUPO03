@@ -66,15 +66,13 @@ namespace Vistas.Usuarios
                 var usuario = listaUsuarios[indexActual];
                 txtApellidoNombre.Text = usuario.Usu_ApellidoNombre;
                 txtUserName.Text = usuario.Usu_NombreUsuario;
-                txtPassword.Text = usuario.Usu_Contraseña;
-                txtID.Text = usuario.Usu_ID.ToString();
+                txtPassword.Password = usuario.Usu_Contraseña;
                 cmbRol.SelectedValue = usuario.Rol_ID;
             }
         }
 
         private void LimpiarCampos()
         {
-            txtID.Clear();
             txtApellidoNombre.Clear();
             txtUserName.Clear();
             txtPassword.Clear();
@@ -113,6 +111,8 @@ namespace Vistas.Usuarios
         {
             esNuevo = true;
             LimpiarCampos();
+            cmbRol.SelectedIndex = -1;
+            txtApellidoNombre.Focus();
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -127,7 +127,7 @@ namespace Vistas.Usuarios
             {
                 Usu_ApellidoNombre = txtApellidoNombre.Text,
                 Usu_NombreUsuario = txtUserName.Text,
-                Usu_Contraseña = txtPassword.Text,
+                Usu_Contraseña = txtPassword.Password,
                 Rol_ID = (int)cmbRol.SelectedValue
             };
 
@@ -149,20 +149,62 @@ namespace Vistas.Usuarios
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
-        {
-            if (listaUsuarios.Count > 0)
             {
+                if (listaUsuarios == null || listaUsuarios.Count == 0)
+                {
+                    MessageBox.Show("No hay usuarios para eliminar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtApellidoNombre.Text) || 
+                    string.IsNullOrWhiteSpace(txtUserName.Text) || 
+                    cmbRol.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Debe seleccionar o cargar un usuario antes de eliminar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 var usuario = listaUsuarios[indexActual];
-                bool ok = TrabajarUsuarios.EliminarUsuario(usuario.Usu_ID);
-                MessageBox.Show(ok ? "Usuario eliminado." : "Error al eliminar usuario.");
-                CargarUsuarios();
+
+                MessageBoxResult result = MessageBox.Show(
+                string.Format("¿Está seguro de que desea eliminar al usuario:\n\n{0} ({1})?",
+                              usuario.Usu_ApellidoNombre, usuario.Usu_NombreUsuario),
+                "Confirmar eliminación",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    bool ok = TrabajarUsuarios.EliminarUsuario(usuario.Usu_ID);
+
+                    if (ok)
+                    {
+                        MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                        CargarUsuarios();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al eliminar usuario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
-        }
+
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            esNuevo = false;
-            // Los campos ya están listos para editar
+            if (listaUsuarios.Count > 0 && indexActual >= 0 && indexActual < listaUsuarios.Count)
+            {
+                esNuevo = false;
+
+                MostrarUsuario();
+
+                MessageBox.Show("Usuario cargado para modificar.", "Modificar Usuario", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("No hay usuario seleccionado para modificar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

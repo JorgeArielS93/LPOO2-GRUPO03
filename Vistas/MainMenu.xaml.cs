@@ -71,5 +71,11 @@ namespace Vistas
             GrillaCursos grilla = new GrillaCursos();
             grilla.Show();
         }
+
+        private void ListaUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            ListadoUsuarios listado = new ListadoUsuarios();
+            listado.Show();
+        }
     }
 }

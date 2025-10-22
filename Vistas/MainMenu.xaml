@@ -37,6 +37,10 @@
                                   Click="ABMUsuarios_Click"
                                   Background="#2c3e50"/>
                         <Separator/>
+                        <MenuItem Header="Lista Usuarios"
+                                  Click="ListaUsuarios_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
                         <MenuItem Header="Alta usuarios"    
                                   Click="MenuUsuarios_Click"
                                   Background="#2c3e50"/>
