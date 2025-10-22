@@ -123,5 +123,39 @@ namespace ClaseBase.Servicios
             // Retornamos la lista 
             return listaUsuarios;
         }
+
+        // Modificar usuario existente
+        public static bool ModificarUsuario(Usuario usuario)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Usuario SET Usu_NombreUsuario=@nombreUsuario, Usu_Contraseña=@contrasenia, Usu_ApellidoNombre=@apellidoNombre, Rol_ID=@rol WHERE Usu_ID=@id", cn);
+
+                cmd.Parameters.AddWithValue("@nombreUsuario", usuario.Usu_NombreUsuario);
+                cmd.Parameters.AddWithValue("@contrasenia", usuario.Usu_Contraseña);
+                cmd.Parameters.AddWithValue("@apellidoNombre", usuario.Usu_ApellidoNombre);
+                cmd.Parameters.AddWithValue("@rol", usuario.Rol_ID);
+                cmd.Parameters.AddWithValue("@id", usuario.Usu_ID);
+
+                int filas = cmd.ExecuteNonQuery();
+                return filas > 0;
+            }
+        }
+
+        // Eliminar usuario por ID
+        public static bool EliminarUsuario(int id)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM Usuario WHERE Usu_ID=@id", cn);
+                cmd.Parameters.AddWithValue("@id", id);
+                int filas = cmd.ExecuteNonQuery();
+                return filas > 0;
+            }
+        }
+
     }
 }
