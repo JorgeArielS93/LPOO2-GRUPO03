@@ -85,10 +85,8 @@ namespace ClaseBase.Servicios
         // Traer todos los Usuarios
         public static ObservableCollection<Usuario> TraerUsuarios()
         {
-            // Creamos la colección que devolverá el método 
             ObservableCollection<Usuario> listaUsuarios = new ObservableCollection<Usuario>();
             
-            // Usamos la cadena de conexión de la configuración del proyecto 
             SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto);
             SqlCommand cmd = new SqlCommand();
             
@@ -98,13 +96,10 @@ namespace ClaseBase.Servicios
 
             cn.Open();
             
-            // Usamos SqlDataReader, similar a tu método AutenticarUsuario
             SqlDataReader dr = cmd.ExecuteReader();
 
-            // Leemos fila por fila
             while (dr.Read())
             {
-                // Creamos un objeto Usuario por cada fila
                 Usuario oUsuario = new Usuario
                 {
                     Usu_ID = Convert.ToInt32(dr["Usu_ID"]),
@@ -114,17 +109,15 @@ namespace ClaseBase.Servicios
                     Rol_ID = Convert.ToInt32(dr["Rol_ID"])
                 };
 
-                // Añadimos el usuario a la colección 
                 listaUsuarios.Add(oUsuario);
             }
 
             cn.Close();
-            
-            // Retornamos la lista 
+         
             return listaUsuarios;
         }
 
-        // Modificar usuario existente
+        //Modificar Usuario
         public static bool ModificarUsuario(Usuario usuario)
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
