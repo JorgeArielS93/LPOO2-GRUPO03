@@ -97,6 +97,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Usuario\ABMUsuario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Usuario\ABMUsuario.xaml.cs">
+      <DependentUpon>ABMUsuario.xaml</DependentUpon>
+    </Compile>
     <Page Include="Curso\EstadosDeCursos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
