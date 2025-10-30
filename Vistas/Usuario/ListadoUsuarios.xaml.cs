@@ -101,6 +101,23 @@ namespace Vistas.Usuarios
         {
             this.Close();
         }
+
+        private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (listaUsuarios == null) return;
+
+            string textoBusqueda = txtBuscar.Text.ToLower();
+
+            if (string.IsNullOrEmpty(textoBusqueda))
+            {
+                dgUsuarios.ItemsSource = listaUsuarios;
+            }
+            else
+            {
+                var usuariosFiltrados = listaUsuarios.Where(u => u.Usu_NombreUsuario.ToLower().Contains(textoBusqueda)).ToList();
+                dgUsuarios.ItemsSource = new ObservableCollection<Usuario>(usuariosFiltrados);
+            }
+        }
     }
 
     public class ContraseñaConverter : IValueConverter
