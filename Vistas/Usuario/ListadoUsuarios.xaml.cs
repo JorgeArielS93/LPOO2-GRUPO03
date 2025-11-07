@@ -13,7 +13,6 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using ClaseBase;
-using ClaseBase.Servicios;
 
 namespace Vistas.Usuarios
 {
@@ -118,6 +117,16 @@ namespace Vistas.Usuarios
                 dgUsuarios.ItemsSource = new ObservableCollection<Usuario>(usuariosFiltrados);
             }
         }
+
+        private void btnVistaPrevia_Click(object sender, RoutedEventArgs e)
+        {
+            var listaFiltrada = dgUsuarios.ItemsSource.Cast<Usuario>().ToList();
+            VistaPreviaImpresion vista = new VistaPreviaImpresion(listaFiltrada);
+            vista.ShowDialog();
+        }
+
+
+
     }
 
     public class ContraseñaConverter : IValueConverter

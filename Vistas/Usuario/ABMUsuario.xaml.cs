@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using ClaseBase;
-using ClaseBase.Servicios;
 
 namespace Vistas.Usuarios
 {

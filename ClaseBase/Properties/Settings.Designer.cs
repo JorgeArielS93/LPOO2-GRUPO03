@@ -26,7 +26,7 @@ namespace ClaseBase.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"Data Source=.\SQLEXPRESS;AttachDbFilename=""D:\Educación\Facultad\3° Año\2do Cuatrimestre\Laboratorio de Programacion Orientado a Objetos II\Practica\Trabajo Practico 3\LPOO2-GRUPO03\instituto.mdf"";Integrated Security=True;Connect Timeout=30;User Instance=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Data Source=.\SQLEXPRESS;AttachDbFilename=""D:\Educación\Facultad\3° Año\2do Cuatrimestre\Laboratorio de Programacion Orientado a Objetos II\Practica\Trabajo Practico 5\LPOO2-GRUPO03\instituto.mdf"";Integrated Security=True;Connect Timeout=30;User Instance=True")]
         public string BDInstituto {
             get {
                 return ((string)(this["BDInstituto"]));
