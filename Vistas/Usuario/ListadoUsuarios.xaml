@@ -49,6 +49,12 @@
                             Width="80" Height="30" Margin="10,0,0,0"
                             Background="#e74c3c" Foreground="White" 
                             BorderBrush="#c0392b" Click="btnCerrar_Click"/>
+
+                    <Button Name="btnVistaPrevia" Content="Vista Previa" 
+                            Width="100" Height="30"
+                            Background="Green" Foreground="White" 
+                            BorderBrush="Gray" Click="btnVistaPrevia_Click" Margin="10,0,0,0"/>
+
                 </StackPanel>
 
                 <DataGrid Grid.Row="1" Name="dgUsuarios" 
@@ -179,7 +185,6 @@
             </Grid>
         </Border>
 
-        <!-- Footer -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" 
                     HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Name="lblTotalUsuarios" Text="Total de usuarios: 0" 

@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.ObjectModel;
 
-namespace ClaseBase.Servicios
+namespace ClaseBase
 {
     public class TrabajarUsuarios
     {

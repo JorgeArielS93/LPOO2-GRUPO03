@@ -83,6 +83,9 @@
     <Compile Include="Usuario\ListadoUsuarios.xaml.cs">
       <DependentUpon>ListadoUsuarios.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Usuario\VistaPreviaImpresion.xaml.cs">
+      <DependentUpon>VistaPreviaImpresion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XmlElement.cs" />
     <Page Include="Alumno\AltaAlumno.xaml">
       <SubType>Designer</SubType>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Usuario\ListadoUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuario\VistaPreviaImpresion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
