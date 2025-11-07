@@ -70,7 +70,11 @@
                                   Background="#2c3e50"/>
                     </MenuItem>
 
-                    <MenuItem Header="_Inscripciones"></MenuItem>
+                    <MenuItem Header="_Inscripciones">
+                        <MenuItem Header="Nueva Inscripcion"   
+                                  Click="MenuInscripciones_Click"
+                                  Background="#2c3e50"/>
+                    </MenuItem>
 
                     <MenuItem Header="_Reportes"></MenuItem>
                 </Menu>
