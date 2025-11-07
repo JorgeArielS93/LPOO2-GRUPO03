@@ -77,5 +77,11 @@ namespace Vistas
             ListadoUsuarios listado = new ListadoUsuarios();
             listado.Show();
         }
+
+        private void MenuInscripciones_Click(object sender, RoutedEventArgs e)
+        {
+            frmInscripcion inscripcion = new frmInscripcion();
+            inscripcion.Show();
+        }
     }
 }
