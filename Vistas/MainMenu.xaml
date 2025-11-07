@@ -1,0 +1,95 @@
+﻿<Window x:Class="Vistas.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menú Principal" Height="554" Width="848"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="SISTEMA DE GESTIÓN DE CURSOS" 
+                           FontSize="18" FontWeight="Bold" 
+                           Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Universidad Nacional de Jujuy" 
+                           FontSize="12" 
+                           Foreground="#bdc3c7" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" 
+                CornerRadius="10" Margin="50,0,50,0"
+                BorderBrush="#bdc3c7" BorderThickness="1">
+            <DockPanel Margin="20">
+
+                <Menu DockPanel.Dock="Top" 
+                      Background="#2c3e50" 
+                      Foreground="White" 
+                      FontWeight="Bold" 
+                      Margin="0,0,0,20">
+                    
+                    <MenuItem Header="_Sistema">
+                        <MenuItem Header="Usuarios"
+                                  Click="ABMUsuarios_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
+                        <MenuItem Header="Lista Usuarios"
+                                  Click="ListaUsuarios_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
+                        <MenuItem Header="Alta usuarios"    
+                                  Click="MenuUsuarios_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
+                        <MenuItem Header="Salir" 
+                                  Click="Salir_Click"
+                                  Background="#2c3e50"/>
+                    </MenuItem>
+
+                    <MenuItem Header="_Académico">
+                        <MenuItem Header="Alta Cursos"   
+                                  Click="MenuCursos_Click"
+                                  Background="#2c3e50"/>
+                        <MenuItem Header="Lista Cursos"   
+                                  Click="MenuListaCursos_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
+                        <MenuItem Header="Docentes"   
+                                  Click="MenuDocentes_Click"
+                                  Background="#2c3e50"/>
+                        <Separator/>
+                        <MenuItem Header="Alta Alumno"
+                                  Click="MenuAltaAlumno_Click"
+                                  Background="#2c3e50"/>
+                        <MenuItem Header="Modificar Alumno"
+                                  Click="MenuModificarAlumno_Click"
+                                  Background="#2c3e50"/>
+                    </MenuItem>
+
+                    <MenuItem Header="_Inscripciones"></MenuItem>
+
+                    <MenuItem Header="_Reportes"></MenuItem>
+                </Menu>
+
+                <Grid Background="White">
+                    <TextBlock Text="Grupo 03" 
+                               FontSize="16" FontWeight="SemiBold" 
+                               Foreground="#34495E"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </Grid>
+            </DockPanel>
+        </Border>
+
+        <TextBlock Grid.Row="2" 
+                   Text="© 2025 - Laboratorio de Programación Orientada a Objetos II"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="10" Foreground="#7f8c8d"/>
+    </Grid>
+</Window>

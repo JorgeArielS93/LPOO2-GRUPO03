@@ -1,0 +1,34 @@
+﻿<Window x:Class="Vistas.EstadosDeCursos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Vistas"
+        Title="Estados de Cursos" Height="220" Width="350">
+    <Window.Resources>
+        <!-- Cargar el XML -->
+        <XmlDataProvider x:Key="EstadosData" Source="../Resources/Estados.xml" XPath="Estados/Estado" />
+
+        <!-- Conversor -->
+        <local:ConversorDeEstados x:Key="ConversorDeEstados" />
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Estado:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5"/>
+
+        <ComboBox x:Name="cmbEstadoCurso"
+          Height="28" FontSize="13" Margin="0,0,0,10"
+          ItemsSource="{Binding Source={StaticResource EstadosData}}"
+          DisplayMemberPath="."
+          SelectedValuePath="@key"
+          SelectedIndex="0"/>
+
+        <Rectangle Height="33" Width="154" Stroke="Black" StrokeThickness="1"
+           Fill="{Binding ElementName=cmbEstadoCurso, Path=SelectedValue, Converter={StaticResource ConversorDeEstados}}"
+           Margin="63,8,65,34" Grid.Row="2" />
+    </Grid>
+</Window>

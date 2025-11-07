@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,14 +41,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alumno.cs" />
-    <Compile Include="Docente.cs" />
+    <Compile Include="Entidades\Alumno.cs" />
+    <Compile Include="Entidades\Curso.cs" />
+    <Compile Include="Entidades\Docente.cs" />
+    <Compile Include="Entidades\Estado.cs" />
+    <Compile Include="Entidades\EstadoType.cs" />
+    <Compile Include="Entidades\Inscripcion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roles.cs" />
-    <Compile Include="Usuario.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Entidades\Roles.cs" />
+    <Compile Include="Servicios\TrabajarAlumnos.cs" />
+    <Compile Include="Servicios\TrabajarCursos.cs" />
+    <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Servicios\TrabajarDocentes.cs" />
+    <Compile Include="Servicios\TrabajarUsuarios.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="ClassDiagram.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

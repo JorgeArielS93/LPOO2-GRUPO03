@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClaseBase
 {
-    class Docente
+    public class Docente
     {
         public int Doc_ID { get; set; }
         public string Doc_DNI { get; set; }

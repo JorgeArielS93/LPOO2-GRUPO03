@@ -55,18 +55,128 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="institutoDataSet.cs">
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Resources\ConversorDeEstados.cs" />
+    <Compile Include="Usuario\AltaUsuario.xaml.cs">
+      <DependentUpon>AltaUsuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Curso\EstadosDeCursos.xaml.cs">
+      <DependentUpon>EstadosDeCursos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="institutoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Alumno\ModificarAlumno.xaml.cs">
+      <DependentUpon>ModificarAlumno.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LoginUserControl.xaml.cs">
+      <DependentUpon>LoginUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ValidarAlumno.xaml.cs">
+      <DependentUpon>ValidarAlumno.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario\ListadoUsuarios.xaml.cs">
+      <DependentUpon>ListadoUsuarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario\VistaPreviaImpresion.xaml.cs">
+      <DependentUpon>VistaPreviaImpresion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XmlElement.cs" />
+    <Page Include="Alumno\AltaAlumno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Curso\AltaCurso.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Docente\AltaDocente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuario\AltaUsuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuario\ABMUsuario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Usuario\ABMUsuario.xaml.cs">
+      <DependentUpon>ABMUsuario.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Curso\EstadosDeCursos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Curso\GrillaCursos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Alumno\AltaAlumno.xaml.cs">
+      <DependentUpon>AltaAlumno.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Curso\AltaCurso.xaml.cs">
+      <DependentUpon>AltaCurso.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Docente\AltaDocente.xaml.cs">
+      <DependentUpon>AltaDocente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Curso\GrillaCursos.xaml.cs">
+      <DependentUpon>GrillaCursos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Alumno\ModificarAlumno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Plantillas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Estilos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LoginUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ValidarAlumno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuario\ListadoUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuario\VistaPreviaImpresion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,11 +196,37 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="institutoDataSet.xsc">
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="institutoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>institutoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="institutoDataSet.xss">
+      <DependentUpon>institutoDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClaseBase\ClaseBase.csproj">
+      <Project>{688ACA11-E427-49F4-9E9B-0D0BC41C9FC8}</Project>
+      <Name>ClaseBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Estados.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

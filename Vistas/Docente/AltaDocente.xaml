@@ -1,0 +1,65 @@
+﻿<Window x:Class="Vistas.AltaDocente"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AltaDocente" Height="660" Width="848"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="SISTEMA DE GESTIÓN DE CURSOS" 
+                          FontSize="18" FontWeight="Bold" 
+                          Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Universidad Nacional de Jujuy" 
+                          FontSize="12" 
+                          Foreground="#bdc3c7" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Formulario de Alta Docente -->
+        <Border Background="White" 
+                CornerRadius="10" Margin="40,0,40,0"
+                BorderBrush="#bdc3c7" BorderThickness="1" Grid.Row="1"></Border>
+        <StackPanel VerticalAlignment="Center" Margin="90,20,102,50" Grid.Row="1">
+            <TextBlock Text="Alta Docente" FontSize="17" FontWeight="Bold" 
+               HorizontalAlignment="Center" Foreground="#2c3e50" Margin="0,0,0,30" />
+
+            <!-- Campo Dni -->
+            <TextBlock Text="DNI:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
+            <TextBox Name="txtDniDocente" Style="{StaticResource tbAltaDocente}"/>
+
+            <!-- Campo Nombre -->
+            <TextBlock Text="Nombre:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
+            <TextBox Name="txtNombreDocente" Style="{StaticResource tbAltaDocente}"/>
+
+            <!-- Campo Apellido -->
+            <TextBlock Text="Apellido:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
+            <TextBox Name="txtApellidoDocente" Style="{StaticResource tbAltaDocente}"/>
+
+            <!-- Campo Email -->
+            <TextBlock Text="Email:" FontWeight="SemiBold" Foreground="#34495e" Margin="0,0,0,5" />
+            <TextBox Name="txtEmailDocente" Width="684" Style="{StaticResource tbAltaDocente}"/>
+
+            <!-- Botón registro -->
+            <Button Name="btnAltaDocente" Content="REGISTRAR" Click="btnAltaDocente_Click" Style="{StaticResource btnAltaDocente}" />
+ 
+            <!-- Mensaje de error -->
+            <TextBlock Name="lblError" Text="" Foreground="Red" 
+               HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12" />
+        </StackPanel>
+
+
+        <!-- Footer -->
+        <TextBlock Grid.Row="2" 
+                  Text="© 2025 - Laboratorio de Programación Orientada a Objetos II"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                  FontSize="10" Foreground="#7f8c8d"/>
+
+    </Grid>
+</Window>

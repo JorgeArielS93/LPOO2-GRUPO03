@@ -1,0 +1,71 @@
+﻿<Window x:Class="Vistas.AltaUsuario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AltaUsuario" Height="639" Width="623" Loaded="AltaUsuario_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="SISTEMA DE GESTIÓN DE CURSOS" 
+                           FontSize="18" FontWeight="Bold" 
+                           Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Universidad Nacional de Jujuy" 
+                           FontSize="12" 
+                           Foreground="#bdc3c7" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <Border Background="White" 
+                CornerRadius="10" Margin="40,0,40,0"
+                BorderBrush="#bdc3c7" BorderThickness="1" Grid.Row="1"/>
+
+        <StackPanel VerticalAlignment="Center" Margin="90,20,102,50" Grid.Row="1">
+            <TextBlock Text="Alta Usuario" FontSize="17" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Foreground="#2c3e50" 
+                       Margin="0,0,0,30" />
+
+            <TextBlock Text="Nombre de Usuario:" FontWeight="SemiBold" 
+                       Foreground="#34495e" Margin="0,0,0,5"/>
+            <TextBox Name="txtNombreUsuario" Height="35" FontSize="13" 
+                     BorderBrush="#95a5a6" BorderThickness="1"
+                     Padding="10,8" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Contraseña:" FontWeight="SemiBold" 
+                       Foreground="#34495e" Margin="0,0,0,5"/>
+            <PasswordBox Name="txtContraseña" Height="35" FontSize="13" 
+                         BorderBrush="#95a5a6" BorderThickness="1"
+                         Padding="10,8" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Apellido y Nombre:" FontWeight="SemiBold" 
+                       Foreground="#34495e" Margin="0,0,0,5"/>
+            <TextBox Name="txtApellidoNombre" Height="35" FontSize="13" 
+                     BorderBrush="#95a5a6" BorderThickness="1"
+                     Padding="10,8" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Rol:" FontWeight="SemiBold" 
+                       Foreground="#34495e" Margin="0,0,0,5"/>
+            <ComboBox Name="cmbRol" Height="28" FontSize="13" Margin="0,0,0,15">
+            </ComboBox>
+
+            <Button Name="btnAltaUsuario" 
+                    Content="REGISTRAR" 
+                    Height="40" Width="158"
+                    Click="btnAltaUsuario_Click"
+                    Style="{StaticResource ResourceKey=btnPlantillaRegistrar}" />
+
+            <TextBlock Name="lblError" Text="" Foreground="Red" 
+                       HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" 
+                   Text="© 2025 - Laboratorio de Programación Orientada a Objetos II"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="10" Foreground="#7f8c8d"/>
+    </Grid>
+</Window>
