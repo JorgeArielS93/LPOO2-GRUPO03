@@ -1,0 +1,60 @@
+﻿<Window x:Class="Vistas.AnularInscripciones"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Anular Inscripción" Height="480" Width="550"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
+            <TextBlock Text="ANULAR INSCRIPCIÓN" 
+                       FontSize="18" FontWeight="Bold" 
+                       Foreground="White" HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <StackPanel Grid.Row="1" Margin="40,0">
+            <TextBlock Text="DNI del Alumno:" FontWeight="SemiBold" Foreground="#34495e" />
+            <Grid Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Name="txtDNI" Height="35" FontSize="13" Padding="10,8" 
+                         BorderBrush="#95a5a6" BorderThickness="1"/>
+
+                <Button Name="btnBuscar" Content="Buscar" Grid.Column="1" 
+                        Height="35" Width="100" Margin="10,0,0,0" 
+                        Click="btnBuscar_Click" />
+            </Grid>
+
+            <TextBlock Name="lblNombreAlumno" Text="Esperando DNI..." 
+                       FontSize="14" FontWeight="Bold" Margin="0,15,0,0"
+                       Foreground="#34495e" MinHeight="20"/>
+
+            <TextBlock Text="Inscripciones Activas:" FontWeight="SemiBold" Margin="0,20,0,5" Foreground="#34495e"/>
+            <ComboBox Name="cmbInscripciones" Height="35" FontSize="13"
+                      IsEnabled="False">
+            </ComboBox>
+
+            <Button Name="btnAnular" Content="Anular Inscripción Seleccionada"
+                    Height="40" Width="250"
+                    Margin="0,30,0,0" IsEnabled="False"
+                    Background="#e74c3c" Foreground="White"
+                    BorderThickness="0"
+                    Click="btnAnular_Click" />
+
+            <TextBlock Name="lblError" Foreground="Red" 
+                       HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="12"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" Text="© 2025 - LPOO II - Grupo 03"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="10" Foreground="#7f8c8d"/>
+    </Grid>
+</Window>

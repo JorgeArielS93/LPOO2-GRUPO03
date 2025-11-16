@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Inscripcion\AnularInscripciones.xaml.cs">
+      <DependentUpon>AnularInscripciones.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inscripcion\frmInscripcion.xaml.cs">
       <DependentUpon>frmInscripcion.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Docente\AltaDocente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inscripcion\AnularInscripciones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,7 +210,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="institutoDataSet.xsc">
       <DependentUpon>institutoDataSet.xsd</DependentUpon>
     </None>

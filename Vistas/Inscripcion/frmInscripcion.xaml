@@ -12,15 +12,15 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
+        <!-- Header (Sin cambios) -->
         <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="SISTEMA DE GESTION DE CURSOS" 
-                          FontSize="18" FontWeight="Bold" 
-                          Foreground="White" HorizontalAlignment="Center"/>
+                           FontSize="18" FontWeight="Bold" 
+                           Foreground="White" HorizontalAlignment="Center"/>
                 <TextBlock Text="Universidad Nacional de Jujuy - Inscripcion a Cursos" 
-                          FontSize="12" 
-                          Foreground="#bdc3c7" HorizontalAlignment="Center"/>
+                           FontSize="12" 
+                           Foreground="#bdc3c7" HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
 
@@ -28,15 +28,16 @@
         <Border Background="White" 
                 CornerRadius="10" Margin="40,0,40,0"
                 BorderBrush="#bdc3c7" BorderThickness="1" Grid.Row="1">
-            
+
             <Grid Margin="30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <!-- Esta fila contendrá el Scroll -->
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Title -->
+                <!-- Title (Sin cambios) -->
                 <TextBlock Text="Inscripcion a Cursos y Talleres" 
                            Grid.Row="0"
                            FontSize="20" FontWeight="Bold" 
@@ -45,146 +46,153 @@
                            Margin="0,0,0,25" />
 
                 <!-- Form -->
-                <StackPanel Grid.Row="1" Margin="50,0">
-                    
-                    <!-- Alumno Selection -->
-                    <TextBlock Text="Seleccionar Alumno:" 
-                               FontWeight="SemiBold" 
-                               Foreground="#34495e" 
-                               FontSize="14"
-                               Margin="0,0,0,5" />
-                    
-                    <ComboBox Name="cboAlumnos"
-                              Height="40" 
-                              FontSize="13"
-                              Margin="0,0,0,20"
-                              SelectedValuePath="Alu_ID">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Alu_Apellido}" FontWeight="Bold"/>
-                                    <TextBlock Text=", " />
-                                    <TextBlock Text="{Binding Alu_Nombre}" Margin="0,0,5,0"/>
-                                    <TextBlock Text="(DNI: " Foreground="Gray"/>
-                                    <TextBlock Text="{Binding Alu_DNI}" Foreground="Gray"/>
-                                    <TextBlock Text=")" Foreground="Gray"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                <!-- 1. INICIA EL CAMBIO: Se añade el ScrollViewer -->
+                <ScrollViewer Grid.Row="1" Margin="50,0" VerticalScrollBarVisibility="Auto">
 
-                    <!-- Curso Selection -->
-                    <TextBlock Text="Seleccionar Curso:" 
-                               FontWeight="SemiBold" 
-                               Foreground="#34495e" 
-                               FontSize="14"
-                               Margin="0,0,0,5" />
-                    
-                    <ComboBox Name="cboCursos"
-                              Height="40" 
-                              FontSize="13"
-                              Margin="0,0,0,20"
-                              SelectedValuePath="Cur_ID"
-                              SelectionChanged="cboCursos_SelectionChanged">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Cur_Nombre}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Cur_Descripcion}" 
-                                               FontSize="11" 
-                                               Foreground="Gray" 
-                                               TextWrapping="Wrap"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <!-- 2. Se quita el Margin="50,0" de este StackPanel -->
+                    <StackPanel>
 
-                    <!-- Course Details -->
-                    <Border Name="borderDetallesCurso" 
-                            Visibility="Collapsed"
-                            Background="#ecf0f1" 
-                            Padding="15" 
-                            CornerRadius="5"
-                            Margin="0,0,0,20">
-                        <StackPanel>
-                            <TextBlock Text="Detalles del Curso" 
-                                       FontWeight="Bold" 
-                                       FontSize="13"
-                                       Foreground="#2c3e50"
-                                       Margin="0,0,0,10"/>
-                            
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <!-- Alumno Selection (Sin cambios) -->
+                        <TextBlock Text="Seleccionar Alumno:" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#34495e" 
+                                   FontSize="14"
+                                   Margin="0,0,0,5" />
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" 
-                                           Text="Cupo: " 
-                                           FontWeight="SemiBold" 
-                                           Margin="0,0,10,5"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" 
-                                           Name="txtCupo" 
-                                           Margin="0,0,0,5"/>
+                        <ComboBox Name="cboAlumnos"
+                                  Height="40" 
+                                  FontSize="13"
+                                  Margin="0,0,0,20"
+                                  SelectedValuePath="Alu_ID">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Alu_Apellido}" FontWeight="Bold"/>
+                                        <TextBlock Text=", " />
+                                        <TextBlock Text="{Binding Alu_Nombre}" Margin="0,0,5,0"/>
+                                        <TextBlock Text="(DNI: " Foreground="Gray"/>
+                                        <TextBlock Text="{Binding Alu_DNI}" Foreground="Gray"/>
+                                        <TextBlock Text=")" Foreground="Gray"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" 
-                                           Text="Fecha Inicio: " 
-                                           FontWeight="SemiBold" 
-                                           Margin="0,0,10,5"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" 
-                                           Name="txtFechaInicio" 
-                                           Margin="0,0,0,5"/>
+                        <!-- Curso Selection (Sin cambios) -->
+                        <TextBlock Text="Seleccionar Curso:" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#34495e" 
+                                   FontSize="14"
+                                   Margin="0,0,0,5" />
 
-                                <TextBlock Grid.Row="2" Grid.Column="0" 
-                                           Text="Fecha Fin: " 
-                                           FontWeight="SemiBold" 
-                                           Margin="0,0,10,5"/>
-                                <TextBlock Grid.Row="2" Grid.Column="1" 
-                                           Name="txtFechaFin" 
-                                           Margin="0,0,0,5"/>
-                            </Grid>
+                        <ComboBox Name="cboCursos"
+                                  Height="40" 
+                                  FontSize="13"
+                                  Margin="0,0,0,20"
+                                  SelectedValuePath="Cur_ID"
+                                  SelectionChanged="cboCursos_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Cur_Nombre}" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Cur_Descripcion}" 
+                                                     FontSize="11" 
+                                                     Foreground="Gray" 
+                                                     TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <!-- Course Details (Sin cambios) -->
+                        <Border Name="borderDetallesCurso" 
+                                Visibility="Collapsed"
+                                Background="#ecf0f1" 
+                                Padding="15" 
+                                CornerRadius="5"
+                                Margin="0,0,0,20">
+                            <StackPanel>
+                                <TextBlock Text="Detalles del Curso" 
+                                           FontWeight="Bold" 
+                                           FontSize="13"
+                                           Foreground="#2c3e50"
+                                           Margin="0,0,0,10"/>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" 
+                                               Text="Cupo: " 
+                                               FontWeight="SemiBold" 
+                                               Margin="0,0,10,5"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" 
+                                               Name="txtCupo" 
+                                               Margin="0,0,0,5"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" 
+                                               Text="Fecha Inicio: " 
+                                               FontWeight="SemiBold" 
+                                               Margin="0,0,10,5"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" 
+                                               Name="txtFechaInicio" 
+                                               Margin="0,0,0,5"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" 
+                                               Text="Fecha Fin: " 
+                                               FontWeight="SemiBold" 
+                                               Margin="0,0,10,5"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" 
+                                               Name="txtFechaFin" 
+                                               Margin="0,0,0,5"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Buttons (Sin cambios) -->
+                        <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Center"
+                                    Margin="0,20,0,0">
+                            <Button Name="btnInscribir" 
+                                    Content="INSCRIBIR" 
+                                    Height="45" 
+                                    Width="180"
+                                    Style="{StaticResource btnPlantillaRegistrar}"
+                                    Click="btnInscribir_Click" 
+                                    Margin="0,0,15,0"/>
+
+                            <Button Name="btnLimpiar" 
+                                    Content="LIMPIAR" 
+                                    Height="45" 
+                                    Width="180"
+                                    Background="#95a5a6"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    BorderThickness="0"
+                                    Click="btnLimpiar_Click"/>
                         </StackPanel>
-                    </Border>
 
-                    <!-- Buttons -->
-                    <StackPanel Orientation="Horizontal" 
-                                HorizontalAlignment="Center"
-                                Margin="0,20,0,0">
-                        <Button Name="btnInscribir" 
-                                Content="INSCRIBIR" 
-                                Height="45" 
-                                Width="180"
-                                Style="{StaticResource btnPlantillaRegistrar}"
-                                Click="btnInscribir_Click" 
-                                Margin="0,0,15,0"/>
-                        
-                        <Button Name="btnLimpiar" 
-                                Content="LIMPIAR" 
-                                Height="45" 
-                                Width="180"
-                                Background="#95a5a6"
-                                Foreground="White"
-                                FontWeight="Bold"
-                                BorderThickness="0"
-                                Click="btnLimpiar_Click"/>
+                        <!-- Error/Success Message (Sin cambios) -->
+                        <TextBlock Name="lblMensaje" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,20,0,0" 
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"/>
                     </StackPanel>
 
-                    <!-- Error/Success Message -->
-                    <TextBlock Name="lblMensaje" 
-                               HorizontalAlignment="Center" 
-                               Margin="0,20,0,0" 
-                               FontSize="13"
-                               FontWeight="SemiBold"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"/>
-                </StackPanel>
+                </ScrollViewer>
+                <!-- 3. FIN DEL CAMBIO: Se cierra el ScrollViewer -->
 
-                <!-- Inscriptions List -->
+                <!-- Inscriptions List (Sin cambios) -->
                 <GroupBox Grid.Row="2" 
                           Header="Ultimas Inscripciones Registradas" 
                           FontWeight="Bold"
@@ -210,12 +218,12 @@
             </Grid>
         </Border>
 
-        <!-- Footer -->
+        <!-- Footer (Sin cambios) -->
         <TextBlock Grid.Row="2" 
-                  Text="2025 - Laboratorio de Programacion Orientada a Objetos II"
-                  HorizontalAlignment="Center" 
-                  VerticalAlignment="Center"
-                  FontSize="10" 
-                  Foreground="#7f8c8d"/>
+                   Text="2025 - Laboratorio de Programacion Orientada a Objetos II"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontSize="10" 
+                   Foreground="#7f8c8d"/>
     </Grid>
 </Window>

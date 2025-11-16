@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using ClaseBase.Servicios;
 
 namespace ClaseBase
 {
@@ -17,7 +18,7 @@ namespace ClaseBase
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(
                     "SELECT COUNT(*) FROM Inscripcion WHERE Alu_ID = @aluId AND Cur_ID = @curId", cn);
-                
+
                 cmd.Parameters.AddWithValue("@aluId", aluId);
                 cmd.Parameters.AddWithValue("@curId", curId);
 
@@ -34,7 +35,7 @@ namespace ClaseBase
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(
                     "SELECT Est_ID FROM Curso WHERE Cur_ID = @curId", cn);
-                
+
                 cmd.Parameters.AddWithValue("@curId", curId);
 
                 object result = cmd.ExecuteScalar();
@@ -56,7 +57,7 @@ namespace ClaseBase
                 cn.Open();
                 SqlCommand cmd = new SqlCommand(
                     "SELECT Est_ID FROM Estado WHERE Est_Nombre = 'Inscripto' AND Esty_ID = 2", cn);
-                
+
                 object result = cmd.ExecuteScalar();
                 if (result != null)
                 {
@@ -116,7 +117,7 @@ namespace ClaseBase
                     "INNER JOIN Estado e ON c.Est_ID = e.Est_ID " +
                     "WHERE c.Est_ID = 1 " +
                     "ORDER BY c.Cur_Nombre", cn);
-                
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(tabla);
             }
@@ -139,11 +140,55 @@ namespace ClaseBase
                     "INNER JOIN Curso c ON i.Cur_ID = c.Cur_ID " +
                     "INNER JOIN Estado e ON i.Est_ID = e.Est_ID " +
                     "ORDER BY i.Ins_Fecha DESC", cn);
-                
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(tabla);
             }
             return tabla;
+        }
+
+        // --- MÉTODOS NUEVOS AÑADIDOS PARA ANULAR INSCRIPCIÓN ---
+
+        public static DataTable TraerInscripcionesActivasPorAlumno(int aluID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                string query = @"
+                    SELECT 
+                        I.Ins_ID, 
+                        C.Cur_Nombre
+                    FROM Inscripcion I
+                    INNER JOIN Curso C ON I.Cur_ID = C.Cur_ID
+                    INNER JOIN Estado E ON I.Est_ID = E.Est_ID
+                    WHERE I.Alu_ID = @aluID 
+                      AND E.Est_Nombre <> 'Cancelado'"; // Excluimos las ya canceladas
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@aluID", aluID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+        public static bool AnularInscripcion(int insID)
+        {
+            int estadoCanceladoID = TrabajarEstado.ObtenerEstadoID("Cancelado", "Inscripcion");
+
+            // 2. Actualizar la tabla Inscripcion
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                string query = "UPDATE Inscripcion SET Est_ID = @estID WHERE Ins_ID = @insID";
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@estID", estadoCanceladoID);
+                cmd.Parameters.AddWithValue("@insID", insID);
+
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                return filasAfectadas > 0;
+            }
         }
     }
 }

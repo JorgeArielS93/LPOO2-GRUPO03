@@ -83,5 +83,12 @@ namespace Vistas
             frmInscripcion inscripcion = new frmInscripcion();
             inscripcion.Show();
         }
+
+        // --- MÉTODO NUEVO AÑADIDO AQUÍ ---
+        private void MenuAnularInscripcion_Click(object sender, RoutedEventArgs e)
+        {
+            AnularInscripciones anular = new AnularInscripciones();
+            anular.Show();
+        }
     }
 }

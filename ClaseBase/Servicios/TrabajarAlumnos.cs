@@ -97,5 +97,30 @@ namespace ClaseBase
             }
         }
 
+        public static Alumno TraerAlumnoPorDNI(string dni)
+        {
+            Alumno alu = null;
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Alumno WHERE Alu_DNI=@dni", cn);
+                cmd.Parameters.AddWithValue("@dni", dni);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    alu = new Alumno
+                    {
+                        Alu_ID = (int)dr["Alu_ID"],
+                        Alu_DNI = dr["Alu_DNI"].ToString(),
+                        Alu_Apellido = dr["Alu_Apellido"].ToString(),
+                        Alu_Nombre = dr["Alu_Nombre"].ToString(),
+                        Alu_Email = dr["Alu_Email"].ToString()
+                    };
+                }
+            }
+            return alu;
+        }
+
     }
 }
