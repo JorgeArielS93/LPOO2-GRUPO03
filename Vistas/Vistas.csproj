@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Inscripcion\AcreditarInscripcion.xaml.cs">
+      <DependentUpon>AcreditarInscripcion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inscripcion\AnularInscripciones.xaml.cs">
       <DependentUpon>AnularInscripciones.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Docente\AltaDocente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inscripcion\AcreditarInscripcion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

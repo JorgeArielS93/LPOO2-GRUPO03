@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ClaseBase;
 
 namespace Vistas
 {
@@ -79,5 +80,41 @@ namespace Vistas
                                  System.Windows.Threading.DispatcherPriority.Background);
         }
 
+        private void btnCambiarEstado_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgCursos.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un curso de la lista.",
+                                "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            DataRowView drv = (DataRowView)dgCursos.SelectedItem;
+
+            int cursoID = (int)drv["Cur_ID"];
+            int estadoActual = (int)drv["Est_ID"];
+
+            // Podés hacerlo automático o abrir una ventana aparte.
+            // Aquí cambiamos entre 1 = Activo y 2 = Inactivo, como ejemplo:
+            int nuevoEstado = (estadoActual == 1) ? 2 : 1;
+
+            bool ok = TrabajarCursos.CambiarEstadoCurso(cursoID, nuevoEstado);
+
+            if (ok)
+            {
+                MessageBox.Show("Estado cambiado correctamente.",
+                                "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Refresh
+                ObjectDataProvider provider = (ObjectDataProvider)FindResource("list_cursos");
+                provider.Refresh();
+                ActualizarContador();
+            }
+            else
+            {
+                MessageBox.Show("Error al cambiar el estado.",
+                                "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

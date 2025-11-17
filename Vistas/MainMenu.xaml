@@ -75,11 +75,14 @@
                                   Click="MenuInscripciones_Click"
                                   Background="#2c3e50"/>
 
-                        <!-- LÍNEA NUEVA AÑADIDA AQUÍ -->
+                      
                         <MenuItem Header="Anular Inscripción"   
                                   Click="MenuAnularInscripcion_Click"
                                   Background="#2c3e50"/>
-
+                        
+                        <MenuItem Header="Acreditar Inscripción"   
+                                  Click="MenuAcreditarInscripcion_Click"
+                                  Background="#2c3e50"/>
                     </MenuItem>
 
                     <MenuItem Header="_Reportes"></MenuItem>
