@@ -190,5 +190,49 @@ namespace ClaseBase
                 return filasAfectadas > 0;
             }
         }
+        public static DataTable TraerInscripcionesEnCursoPorAlumno(int aluID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+
+                string query = @"
+            SELECT 
+                I.Ins_ID,
+                C.Cur_Nombre
+            FROM Inscripcion I
+            INNER JOIN Curso C ON I.Cur_ID = C.Cur_ID
+            INNER JOIN Estado EIns ON I.Est_ID = EIns.Est_ID
+            INNER JOIN Estado ECur ON C.Est_ID = ECur.Est_ID
+            WHERE I.Alu_ID = @aluID
+              AND ECur.Est_Nombre = 'En_Curso'";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@aluID", aluID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+        public static bool AcreditarInscripcion(int insID)
+        {
+            int estadoConfirmadoID = TrabajarEstado.ObtenerEstadoID("Confirmado", "Inscripcion");
+
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Inscripcion SET Est_ID = @estID WHERE Ins_ID = @insID",
+                    cn);
+
+                cmd.Parameters.AddWithValue("@estID", estadoConfirmadoID);
+                cmd.Parameters.AddWithValue("@insID", insID);
+
+                int filas = cmd.ExecuteNonQuery();
+                return filas > 0;
+            }
+        }
     }
 }

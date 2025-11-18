@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Vistas.Usuarios;
+using Vistas.Inscripcion;
 
 namespace Vistas
 {
@@ -84,11 +85,16 @@ namespace Vistas
             inscripcion.Show();
         }
 
-        // --- MÉTODO NUEVO AÑADIDO AQUÍ ---
         private void MenuAnularInscripcion_Click(object sender, RoutedEventArgs e)
         {
             AnularInscripciones anular = new AnularInscripciones();
             anular.Show();
+        }
+
+        private void MenuAcreditarInscripcion_Click(object sender, RoutedEventArgs e)
+        {
+            AcreditarInscripcion acreditar = new AcreditarInscripcion();
+            acreditar.Show();
         }
     }
 }

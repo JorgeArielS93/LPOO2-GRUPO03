@@ -51,6 +51,12 @@
                             Width="80" Height="30" Margin="10,0,0,0"
                             Background="#e74c3c" Foreground="White" 
                             BorderBrush="#c0392b" Click="btnCerrar_Click"/>
+                    <Button Name="btnCambiarEstado" 
+                        Content="Cambiar Estado" 
+                        Width="130" Height="30" Margin="10,0,0,0"
+                        Background="#f1c40f" Foreground="Black" 
+                        BorderBrush="#d4ac0d"
+                        Click="btnCambiarEstado_Click"/>
                 </StackPanel>
 
                 <!-- DataGrid -->

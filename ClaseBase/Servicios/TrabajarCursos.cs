@@ -75,6 +75,31 @@ namespace ClaseBase
                 int filas = cmd.ExecuteNonQuery();
             }
         }
+        //Añadido para realizar pruebas
+        public static bool CambiarEstadoCurso(int cursoID, int nuevoEstado)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(
+                        "UPDATE Curso SET Est_ID = @estado WHERE Cur_ID = @id", conn);
+
+                    cmd.Parameters.AddWithValue("@id", cursoID);
+                    cmd.Parameters.AddWithValue("@estado", nuevoEstado);
+
+                    int filas = cmd.ExecuteNonQuery();
+
+                    return filas > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
         /*
         public static DataTable TraerCursos()
         {

@@ -151,7 +151,7 @@ namespace Vistas
                 if (resultado == MessageBoxResult.Yes)
                 {
                     // Crear objeto de inscripcion
-                    Inscripcion nuevaInscripcion = new Inscripcion
+                    ClaseBase.Inscripcion nuevaInscripcion = new ClaseBase.Inscripcion
                     {
                         Ins_Fecha = DateTime.Now,
                         Cur_ID = curId.ToString(),
