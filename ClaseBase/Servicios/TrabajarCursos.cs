@@ -100,6 +100,73 @@ namespace ClaseBase
                 return false;
             }
         }
+
+
+        public static List<Curso> TraerCursosPorDocente(int docID)
+        {
+            List<Curso> list = new List<Curso>();
+
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT * FROM Curso WHERE Doc_ID=@doc", cn);
+
+                cmd.Parameters.AddWithValue("@doc", docID);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Curso c = new Curso
+                    {
+                        Cur_ID = (int)dr["Cur_ID"],
+                        Cur_Nombre = dr["Cur_Nombre"].ToString(),
+                        Est_ID = (int)dr["Est_ID"],
+                        Doc_ID = (int)dr["Doc_ID"]
+                    };
+                    list.Add(c);
+                }
+            }
+            return list;
+        }
+
+        public static void ModificarEstado(int idCurso, int nuevoEstado)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+                {
+                    cn.Open();
+
+                    string sql = "UPDATE Curso SET Est_ID = @estado WHERE Cur_ID = @id";
+
+                    SqlCommand cmd = new SqlCommand(sql, cn);
+                    cmd.Parameters.AddWithValue("@estado", nuevoEstado);
+                    cmd.Parameters.AddWithValue("@id", idCurso);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al modificar el estado del curso: " + ex.Message);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         /*
         public static DataTable TraerCursos()
         {

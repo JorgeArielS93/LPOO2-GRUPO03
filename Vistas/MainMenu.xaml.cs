@@ -96,5 +96,11 @@ namespace Vistas
             AcreditarInscripcion acreditar = new AcreditarInscripcion();
             acreditar.Show();
         }
+
+        private void MenuGestionDocente_Click(object sender, RoutedEventArgs e)
+        {
+            GestionDocente gestion = new GestionDocente();
+            gestion.Show();
+        }
     }
 }
