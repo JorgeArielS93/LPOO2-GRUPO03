@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Docente\GestionDocente.xaml.cs">
+      <DependentUpon>GestionDocente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inscripcion\AcreditarInscripcion.xaml.cs">
       <DependentUpon>AcreditarInscripcion.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Resources\ConversorDeEstados.cs" />
+    <Compile Include="Resources\ConversorNombreEstado.cs" />
     <Compile Include="Usuario\AltaUsuario.xaml.cs">
       <DependentUpon>AltaUsuario.xaml</DependentUpon>
     </Compile>
@@ -105,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Docente\AltaDocente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Docente\GestionDocente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
