@@ -148,14 +148,15 @@ namespace ClaseBase
             {
                 cn.Open();
                 string query = @"
-                    SELECT 
-                        I.Ins_ID, 
-                        C.Cur_Nombre
-                    FROM Inscripcion I
-                    INNER JOIN Curso C ON I.Cur_ID = C.Cur_ID
-                    INNER JOIN Estado E ON I.Est_ID = E.Est_ID
-                    WHERE I.Alu_ID = @aluID 
-                      AND E.Est_Nombre <> 'Cancelado'"; // Excluimos las ya canceladas
+            SELECT 
+                I.Ins_ID,
+                I.Cur_ID,
+                C.Cur_Nombre
+            FROM Inscripcion I
+            INNER JOIN Curso C ON I.Cur_ID = C.Cur_ID
+            INNER JOIN Estado E ON I.Est_ID = E.Est_ID
+            WHERE I.Alu_ID = @aluID 
+              AND E.Est_Nombre <> 'Cancelado'";
 
                 SqlCommand cmd = new SqlCommand(query, cn);
                 cmd.Parameters.AddWithValue("@aluID", aluID);
@@ -165,6 +166,7 @@ namespace ClaseBase
             }
             return dt;
         }
+
         public static bool AnularInscripcion(int insID)
         {
             int estadoCanceladoID = TrabajarEstado.ObtenerEstadoID("Cancelado", "Inscripcion");
@@ -340,5 +342,55 @@ namespace ClaseBase
             return dt;
         }
 
+        public static bool CursoTieneCupo(int curId)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT Cur_Cupo FROM Curso WHERE Cur_ID = @curId", cn);
+
+                cmd.Parameters.AddWithValue("@curId", curId);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                    return Convert.ToInt32(result) > 0;
+
+                return false;
+            }
+        }
+
+        public static void DescontarCupo(int curId)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(
+                    "UPDATE Curso SET Cur_Cupo = Cur_Cupo - 1 WHERE Cur_ID = @curId", cn);
+
+                cmd.Parameters.AddWithValue("@curId", curId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void AumentarCupo(int curId)
+        {
+            SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto);
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = "UPDATE Curso SET Cur_Cupo = Cur_Cupo + 1 WHERE Cur_ID = @id";
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@id", curId);
+            cmd.Connection = cn;
+
+            cn.Open();
+            cmd.ExecuteNonQuery();
+            cn.Close();
+        }
+
+
+
     }
+
 }

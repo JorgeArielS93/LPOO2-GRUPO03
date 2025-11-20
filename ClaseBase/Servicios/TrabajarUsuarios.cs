@@ -150,5 +150,48 @@ namespace ClaseBase
             }
         }
 
+        // Existe un nombre de usuario
+        public static bool ExisteNombreUsuario(string nombreUsuario)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM Usuario WHERE Usu_NombreUsuario = @nombre", cn);
+
+                cmd.Parameters.AddWithValue("@nombre", nombreUsuario);
+
+                cn.Open();
+                int cantidad = Convert.ToInt32(cmd.ExecuteScalar());
+                cn.Close();
+
+                return cantidad > 0; 
+            }
+        }
+
+        // Verificar si hay al menos 2 administradores antes de eliminar uno
+        public static bool HayDosAdministradores(int idUsuarioAEliminar)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                SqlCommand cmdRol = new SqlCommand(
+                    "SELECT Rol_ID FROM Usuario WHERE Usu_ID = @id", cn);
+                cmdRol.Parameters.AddWithValue("@id", idUsuarioAEliminar);
+                object rolObj = cmdRol.ExecuteScalar();
+                if (rolObj == null)
+                    return false;
+                int rol = Convert.ToInt32(rolObj);
+                if (rol != 1) 
+                    return true;
+                SqlCommand cmdContar = new SqlCommand(
+                    "SELECT COUNT(*) FROM Usuario WHERE Rol_ID = 1", cn);
+                int cantidadAdmins = Convert.ToInt32(cmdContar.ExecuteScalar());
+                cn.Close();
+                return cantidadAdmins > 1;
+            }
+        }
+
+
+
     }
 }

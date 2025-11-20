@@ -85,20 +85,28 @@ namespace Vistas
 
                 if (result == MessageBoxResult.OK)
                 {
-                    bool registrado = TrabajarAlumnos.AltaAlumno(alumno);
-
-                    if (registrado)
+                    if (!TrabajarAlumnos.ExisteEmail(alumno.Alu_Email))
                     {
-                        MessageBox.Show("Alumno registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        txtDniAlumno.Text = "";
-                        txtApellidoAlumno.Text = "";
-                        txtNombreAlumno.Text = "";
-                        txtEmailAlumno.Text = "";
+                        bool registrado = TrabajarAlumnos.AltaAlumno(alumno);
+
+                        if (registrado)
+                        {
+                            MessageBox.Show("Alumno registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                            txtDniAlumno.Text = "";
+                            txtApellidoAlumno.Text = "";
+                            txtNombreAlumno.Text = "";
+                            txtEmailAlumno.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo registrar el alumno.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo registrar el alumno.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("El Email del Alumno ya existe.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+                   
                 }
             }
             catch (Exception ex)

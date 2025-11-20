@@ -133,8 +133,15 @@ namespace Vistas.Usuarios
             bool ok;
             if (esNuevo)
             {
-                ok = TrabajarUsuarios.AltaUsuario(usuario);
-                MessageBox.Show(ok ? "Usuario agregado correctamente." : "Error al agregar usuario.");
+                if (!TrabajarUsuarios.ExisteNombreUsuario(usuario.Usu_NombreUsuario))
+                {
+                    ok = TrabajarUsuarios.AltaUsuario(usuario);
+                    MessageBox.Show(ok ? "Usuario agregado correctamente." : "Error al agregar usuario.");
+                }
+                else
+                {
+                    MessageBox.Show("El Nombre de Usuario ya existe.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
@@ -175,16 +182,20 @@ namespace Vistas.Usuarios
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    bool ok = TrabajarUsuarios.EliminarUsuario(usuario.Usu_ID);
+                    bool ok = false;
+                    if (TrabajarUsuarios.HayDosAdministradores(usuario.Usu_ID))
+                    {
+                        ok = TrabajarUsuarios.EliminarUsuario(usuario.Usu_ID);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el usuario. Debe existir al menos un usuario administrador.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
 
                     if (ok)
                     {
                         MessageBox.Show("Usuario eliminado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                         CargarUsuarios();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error al eliminar usuario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }

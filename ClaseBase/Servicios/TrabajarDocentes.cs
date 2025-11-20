@@ -79,5 +79,23 @@ namespace ClaseBase
                 return filas > 0;
             }
         }
+
+        // Existe un email
+        public static bool ExisteEmail(string email)
+        {
+            using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
+            {
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT COUNT(*) FROM Docente WHERE Doc_Email = @email", cn);
+
+                cmd.Parameters.AddWithValue("@email", email);
+
+                cn.Open();
+                int cantidad = Convert.ToInt32(cmd.ExecuteScalar());
+                cn.Close();
+
+                return cantidad > 0;
+            }
+        }
     }
 }

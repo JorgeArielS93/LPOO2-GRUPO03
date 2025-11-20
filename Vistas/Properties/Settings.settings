@@ -5,10 +5,10 @@
     <Setting Name="BDInstituto" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Facultad\LPOO2\Proyecto-LPOOII\LPOO2-GRUPO03\LPOO2-GRUPO03\instituto.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;AttachDbFilename="D:\Educación\Facultad\3° Año\2do Cuatrimestre\Laboratorio de Programacion Orientado a Objetos II\Practica\Trabajo Practico Final\LPOO2-GRUPO03\instituto.mdf";Integrated Security=True;Connect Timeout=30;User Instance=True&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Facultad\LPOO2\Proyecto-LPOOII\LPOO2-GRUPO03\LPOO2-GRUPO03\instituto.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True</Value>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;AttachDbFilename="D:\Educación\Facultad\3° Año\2do Cuatrimestre\Laboratorio de Programacion Orientado a Objetos II\Practica\Trabajo Practico Final\LPOO2-GRUPO03\instituto.mdf";Integrated Security=True;Connect Timeout=30;User Instance=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

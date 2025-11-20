@@ -1,11 +1,11 @@
 ﻿<Window x:Class="Vistas.frmInscripcion"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Inscripcion a Cursos" Height="700" Width="900"
+        Title="Inscripcion a Cursos" Height="882" Width="900"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
 
-    <Grid>
+    <Grid Height="858">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>

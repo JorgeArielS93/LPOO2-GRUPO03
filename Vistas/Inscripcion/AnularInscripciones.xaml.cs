@@ -18,7 +18,7 @@ namespace Vistas
 {
     public partial class AnularInscripciones : Window
     {
-        private Alumno alumnoEncontrado; // Guardamos el alumno aquí
+        private Alumno alumnoEncontrado; 
 
         public AnularInscripciones()
         {
@@ -35,18 +35,15 @@ namespace Vistas
 
             try
             {
-                // 1. Buscar al alumno por DNI
                 alumnoEncontrado = TrabajarAlumnos.TraerAlumnoPorDNI(txtDNI.Text.Trim());
 
                 if (alumnoEncontrado != null)
                 {
-                    // 2. Mostrar nombre y cargar sus inscripciones
                     lblNombreAlumno.Text = "Alumno: " + alumnoEncontrado.Alu_Apellido + ", " + alumnoEncontrado.Alu_Nombre;
                     CargarInscripciones(alumnoEncontrado.Alu_ID);
                 }
                 else
                 {
-                    // No se encontró
                     lblError.Text = "No se encontró ningún alumno con ese DNI.";
                     lblNombreAlumno.Text = "Esperando DNI...";
                     LimpiarCamposInscripcion();
@@ -63,15 +60,13 @@ namespace Vistas
         {
             try
             {
-                // 3. Traer la lista de inscripciones (Ins_ID, Cur_Nombre)
                 DataTable dtInscripciones = TrabajarInscripciones.TraerInscripcionesActivasPorAlumno(aluID);
 
                 if (dtInscripciones.Rows.Count > 0)
                 {
-                    // 4. Poblar el ComboBox
                     cmbInscripciones.ItemsSource = dtInscripciones.DefaultView;
-                    cmbInscripciones.DisplayMemberPath = "Cur_Nombre"; // Muestra el nombre del curso
-                    cmbInscripciones.SelectedValuePath = "Ins_ID";     // El valor oculto es el ID de la inscripción
+                    cmbInscripciones.DisplayMemberPath = "Cur_Nombre"; 
+                    cmbInscripciones.SelectedValuePath = "Ins_ID";     
 
                     cmbInscripciones.SelectedIndex = 0;
                     cmbInscripciones.IsEnabled = true;
@@ -101,10 +96,8 @@ namespace Vistas
 
             try
             {
-                // 5. Obtener el ID de la inscripción seleccionada
                 int inscripcionID = (int)cmbInscripciones.SelectedValue;
 
-                // 6. Pedir confirmación
                 MessageBoxResult result = MessageBox.Show(
                     "¿Está seguro de que desea ANULAR la inscripción al curso '" + ((DataRowView)cmbInscripciones.SelectedItem)["Cur_Nombre"] + "'?",
                     "Confirmar Anulación",
@@ -113,14 +106,17 @@ namespace Vistas
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    // 7. Llamar al método de anulación
                     bool exito = TrabajarInscripciones.AnularInscripcion(inscripcionID);
 
                     if (exito)
                     {
+                        DataRowView row = (DataRowView)cmbInscripciones.SelectedItem;
+                        int curId = Convert.ToInt32(row["Cur_ID"]);
+
+                        TrabajarInscripciones.AumentarCupo(curId);
+
                         MessageBox.Show("Inscripción anulada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                        
-                        // 8. Recargar la lista de inscripciones (para que desaparezca la anulada)
+
                         CargarInscripciones(alumnoEncontrado.Alu_ID);
                     }
                     else
@@ -128,17 +124,15 @@ namespace Vistas
                         MessageBox.Show("No se pudo anular la inscripción.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+
             }
             catch (Exception ex)
             {
-                lblError.Text = "Error al anular: " + ex.Message; // Error aquí
+                lblError.Text = "Error al anular: " + ex.Message; 
                 MessageBox.Show("Error: " + ex.Message, "Error de Anulación", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        /// <summary>
-        /// Resetea el ComboBox y el botón de anular.
-        /// </summary>
         private void LimpiarCamposInscripcion()
         {
             cmbInscripciones.ItemsSource = null;

@@ -10,17 +10,36 @@ namespace ClaseBase
 {
     public class TrabajarCursos
     {
-        // Traer todos los Cursos
+        // Traer todos los Cursos con Estado y Nombre del Docente
         public DataTable TraerCursos()
         {
             DataTable tabla = new DataTable();
             SqlConnection cn = null;
-            
+
             try
             {
                 cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto);
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "SELECT * FROM Curso";
+
+                cmd.CommandText =
+                    @"SELECT 
+                        Curso.Cur_ID,
+                        Curso.Cur_Nombre,
+                        Curso.Cur_Descripcion,
+                        Curso.Cur_Cupo,
+                        Curso.Cur_FechaInicio,
+                        Curso.Cur_FechaFin,
+                        Curso.Est_ID,
+                        Estado.Est_Nombre,
+                        Curso.Doc_ID,
+                        Docente.Doc_Apellido + ', ' + Docente.Doc_Nombre AS Doc_NombreCompleto
+                    FROM Curso
+                    INNER JOIN Estado 
+                        ON Curso.Est_ID = Estado.Est_ID
+                    LEFT JOIN Docente
+                        ON Curso.Doc_ID = Docente.Doc_ID;
+                    ";
+
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cn;
 
@@ -29,30 +48,27 @@ namespace ClaseBase
             }
             catch (SqlException sqlEx)
             {
-               
                 throw new Exception("Error de base de datos: " + sqlEx.Message);
             }
             catch (InvalidOperationException invEx)
             {
-               
                 throw new Exception("Error de conexión: " + invEx.Message);
             }
             catch (Exception ex)
             {
-               
                 throw new Exception("Error inesperado al obtener los cursos: " + ex.Message);
             }
             finally
             {
-            
                 if (cn != null && cn.State == ConnectionState.Open)
                 {
                     cn.Close();
                 }
             }
-            
+
             return tabla;
         }
+
 
         // Alta de un nuevo curso
         public static void InsertarCurso(Curso curso)

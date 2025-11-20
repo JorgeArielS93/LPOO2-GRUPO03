@@ -97,19 +97,14 @@ namespace Vistas
 
            if (result == MessageBoxResult.OK)
            {
-               bool registrado = TrabajarUsuarios.AltaUsuario(usuario);
-
-               if (registrado)
+               if (!TrabajarUsuarios.ExisteNombreUsuario(usuario.Usu_NombreUsuario))
                {
-                   MessageBox.Show("Alumno registrado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
-                   txtNombreUsuario.Text = "";
-                   txtContraseña.Password = "";
-                   txtApellidoNombre.Text = "";
-                   cmbRol.SelectedIndex = -1;
+                   bool ok = TrabajarUsuarios.AltaUsuario(usuario);
+                   MessageBox.Show(ok ? "Usuario agregado correctamente." : "Error al agregar usuario.");
                }
                else
                {
-                   MessageBox.Show("No se pudo registrar el alumno.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                   MessageBox.Show("El Nombre de Usuario ya existe.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                }
            }
         }

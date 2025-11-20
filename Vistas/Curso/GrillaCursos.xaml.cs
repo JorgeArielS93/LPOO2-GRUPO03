@@ -94,8 +94,6 @@ namespace Vistas
             int cursoID = (int)drv["Cur_ID"];
             int estadoActual = (int)drv["Est_ID"];
 
-            // Podés hacerlo automático o abrir una ventana aparte.
-            // Aquí cambiamos entre 1 = Activo y 2 = Inactivo, como ejemplo:
             int nuevoEstado = (estadoActual == 1) ? 2 : 1;
 
             bool ok = TrabajarCursos.CambiarEstadoCurso(cursoID, nuevoEstado);
@@ -105,7 +103,6 @@ namespace Vistas
                 MessageBox.Show("Estado cambiado correctamente.",
                                 "Información", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Refresh
                 ObjectDataProvider provider = (ObjectDataProvider)FindResource("list_cursos");
                 provider.Refresh();
                 ActualizarContador();
@@ -116,5 +113,6 @@ namespace Vistas
                                 "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
     }
 }

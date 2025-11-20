@@ -37,18 +37,14 @@ namespace Vistas
         {
             try
             {
-                // Cargar alumnos
                 dtAlumnos = TrabajarInscripciones.TraerAlumnos();
                 cboAlumnos.ItemsSource = dtAlumnos.DefaultView;
 
-                // Cargar cursos programados
                 dtCursos = TrabajarInscripciones.TraerCursosProgramados();
                 cboCursos.ItemsSource = dtCursos.DefaultView;
 
-                // Cargar inscripciones
                 CargarInscripciones();
 
-                // Mensaje informativo si no hay cursos programados
                 if (dtCursos.Rows.Count == 0)
                 {
                     MostrarMensaje("No hay cursos programados disponibles para inscripcion.", Brushes.Orange);
@@ -80,7 +76,6 @@ namespace Vistas
             {
                 DataRowView row = (DataRowView)cboCursos.SelectedItem;
                 
-                // Mostrar detalles del curso
                 txtCupo.Text = row["Cur_Cupo"].ToString();
                 txtFechaInicio.Text = Convert.ToDateTime(row["Cur_FechaInicio"]).ToString("dd/MM/yyyy");
                 txtFechaFin.Text = Convert.ToDateTime(row["Cur_FechaFin"]).ToString("dd/MM/yyyy");
@@ -97,10 +92,8 @@ namespace Vistas
         {
             try
             {
-                // Limpiar mensaje previo
                 lblMensaje.Text = "";
 
-                // Validar selección de alumno
                 if (cboAlumnos.SelectedValue == null)
                 {
                     MostrarMensaje("Por favor, seleccione un alumno.", Brushes.Orange);
@@ -108,7 +101,6 @@ namespace Vistas
                     return;
                 }
 
-                // Validar selección de curso
                 if (cboCursos.SelectedValue == null)
                 {
                     MostrarMensaje("Por favor, seleccione un curso.", Brushes.Orange);
@@ -141,7 +133,15 @@ namespace Vistas
                     return;
                 }
 
-                // Confirmar inscripcion
+                // Validacion 3: Verificar que el curso tenga cupo disponible
+                int cupoActual = Convert.ToInt32(((DataRowView)cboCursos.SelectedItem)["Cur_Cupo"]);
+                if (cupoActual <= 0)
+                {
+                    MostrarMensaje("No hay cupos disponibles para este curso.", Brushes.Red);
+                    return;
+                }
+
+
                 MessageBoxResult resultado = MessageBox.Show(
                     "Esta seguro que desea registrar esta inscripcion?",
                     "Confirmar Inscripcion",
@@ -150,36 +150,47 @@ namespace Vistas
 
                 if (resultado == MessageBoxResult.Yes)
                 {
-                    // Crear objeto de inscripcion
                     ClaseBase.Inscripcion nuevaInscripcion = new ClaseBase.Inscripcion
                     {
                         Ins_Fecha = DateTime.Now,
                         Cur_ID = curId.ToString(),
                         Alu_ID = aluId,
-                        Est_ID = TrabajarInscripciones.ObtenerEstadoInscripto() // Estado "Inscripto"
+                        Est_ID = TrabajarInscripciones.ObtenerEstadoInscripto() 
                     };
 
-                    // Registrar la inscripcion
                     bool exito = TrabajarInscripciones.RegistrarInscripcion(nuevaInscripcion);
 
                     if (exito)
                     {
                         DataRowView alumnoRow = (DataRowView)cboAlumnos.SelectedItem;
                         DataRowView cursoRow = (DataRowView)cboCursos.SelectedItem;
-                        
-                        string nombreCompleto = string.Format("{0} {1}", alumnoRow["Alu_Apellido"], alumnoRow["Alu_Nombre"]);
-                        string nombreCurso = cursoRow["Cur_Nombre"].ToString();
 
-                        string mensaje = string.Format("Inscripcion registrada exitosamente!\nAlumno: {0}\nCurso: {1}", 
-                                                      nombreCompleto, nombreCurso);
-                        MostrarMensaje(mensaje, Brushes.Green);
+                        if (alumnoRow == null || cursoRow == null)
+                        {
+                            MostrarMensaje("Inscripción registrada, pero no se pudo obtener detalle del alumno/curso.", Brushes.Green);
+                        }
+                        else
+                        {
+                            string aluApellido = alumnoRow["Alu_Apellido"] == DBNull.Value ? "" : alumnoRow["Alu_Apellido"].ToString();
+                            string aluNombre = alumnoRow["Alu_Nombre"] == DBNull.Value ? "" : alumnoRow["Alu_Nombre"].ToString();
+                            string curNombre = cursoRow["Cur_Nombre"] == DBNull.Value ? "" : cursoRow["Cur_Nombre"].ToString();
 
-                        // Actualizar la grilla de inscripciones
+                            string nombreCompleto = string.Format("{0} {1}", aluApellido, aluNombre);
+                            string nombreCurso = curNombre;
+                            TrabajarInscripciones.DescontarCupo(curId);
+                            dtCursos = TrabajarInscripciones.TraerCursosProgramados();
+                            cboCursos.ItemsSource = dtCursos.DefaultView;
+
+                            string mensaje = string.Format("Inscripcion registrada exitosamente!\r\nAlumno: {0}\r\nCurso: {1}",
+                                                           nombreCompleto, nombreCurso);
+                            MostrarMensaje(mensaje, Brushes.Green);
+                        }
+
                         CargarInscripciones();
-
-                        // Limpiar formulario
                         LimpiarFormulario();
                     }
+
+
                     else
                     {
                         MostrarMensaje("Error al registrar la inscripcion. Por favor, intente nuevamente.", 

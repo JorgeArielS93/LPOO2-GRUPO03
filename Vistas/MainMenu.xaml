@@ -58,7 +58,7 @@
                                   Click="MenuListaCursos_Click"
                                   Background="#2c3e50"/>
                         <Separator/>
-                        <MenuItem Header="Docentes"   
+                        <MenuItem Header="Alta Docentes"   
                                   Click="MenuDocentes_Click"
                                   Background="#2c3e50"/>
                         <MenuItem Header="Gestion Docentes"   
@@ -87,8 +87,6 @@
                                   Click="MenuAcreditarInscripcion_Click"
                                   Background="#2c3e50"/>
                     </MenuItem>
-
-                    <MenuItem Header="_Reportes"></MenuItem>
 
                     <MenuItem Header="Resultados" Click="MenuResultados_Click" Background="#2c3e50"/>
                 </Menu>
