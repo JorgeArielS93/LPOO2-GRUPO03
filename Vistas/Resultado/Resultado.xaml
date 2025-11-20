@@ -1,0 +1,64 @@
+﻿<Window x:Class="Proyecto.Vistas.Resultado"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Resultados del Alumno" Height="600" Width="690"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <!-- Cabecera -->
+        <Border Grid.Row="0" Background="#2c3e50" Margin="0,0,0,20">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="RESULTADOS DE LOS CURSOS" 
+                           FontSize="18" FontWeight="Bold" 
+                           Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Universidad Nacional de Jujuy" 
+                           FontSize="12" Foreground="#bdc3c7" 
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="10" Margin="40,0,40,0"
+                BorderBrush="#bdc3c7" BorderThickness="1">
+            <StackPanel Margin="20">
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <TextBlock Text="Alumno:" FontWeight="SemiBold" Width="80" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="cmbAlumnos" Width="250" DisplayMemberPath="Alu_Nombre" SelectedValuePath="Alu_ID"/>
+                    <Button Content="Buscar" Width="100" Margin="10,0,0,0" Click="Buscar_Click"/>
+                </StackPanel>
+
+                <DataGrid x:Name="dgResultados" AutoGenerateColumns="False" Height="250" Margin="0,0,0,20">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Curso" Binding="{Binding Cur_Nombre}" Width="*"/>
+                        <DataGridTextColumn Header="Docente" Binding="{Binding Docente}" Width="*"/>
+                        <DataGridTextColumn Header="Fecha Fin" Binding="{Binding FechaFinalizacion, StringFormat=d}" Width="120"/>
+                        <DataGridTextColumn Header="Estado" Binding="{Binding EstadoCurso}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <StackPanel Margin="0,0,50,0">
+                        <TextBlock Text="Finalizados" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="txtFinalizados" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="En Curso" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="txtEnCurso" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Row="2" 
+                   Text="© 2025 - Laboratorio de Programación Orientada a Objetos II"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="10" Foreground="#7f8c8d"/>
+    </Grid>
+</Window>

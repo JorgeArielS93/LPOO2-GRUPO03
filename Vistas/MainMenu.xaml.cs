@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Vistas.Usuarios;
 using Vistas.Inscripcion;
+using Proyecto.Vistas;
 
 namespace Vistas
 {
@@ -101,6 +102,12 @@ namespace Vistas
         {
             GestionDocente gestion = new GestionDocente();
             gestion.Show();
+        }
+
+        private void MenuResultados_Click(object sender, RoutedEventArgs e)
+        {
+            Resultado ventanaResultados = new Resultado();
+            ventanaResultados.Show();
         }
     }
 }
