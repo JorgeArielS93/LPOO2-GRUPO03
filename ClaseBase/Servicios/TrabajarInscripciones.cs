@@ -10,7 +10,7 @@ namespace ClaseBase
 {
     public class TrabajarInscripciones
     {
-        // Verificar si el alumno ya está inscrito en el curso
+
         public static bool AlumnoYaInscrito(int aluId, int curId)
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
@@ -27,7 +27,6 @@ namespace ClaseBase
             }
         }
 
-        // Verificar si el curso está en estado "Programado"
         public static bool CursoEstaProgramado(int curId)
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
@@ -42,14 +41,13 @@ namespace ClaseBase
                 if (result != null)
                 {
                     int estadoId = (int)result;
-                    // Asumiendo que Est_ID = 1 es "Programado"
+
                     return estadoId == 1;
                 }
                 return false;
             }
         }
 
-        // Obtener el ID del estado "Inscripto" para inscripciones
         public static int ObtenerEstadoInscripto()
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
@@ -63,12 +61,11 @@ namespace ClaseBase
                 {
                     return (int)result;
                 }
-                // Si no existe, devolver un valor por defecto (ajustar según la BD)
-                return 5; // Ajustar según los IDs de tu base de datos
+
+                return 5;
             }
         }
 
-        // Registrar una nueva inscripción
         public static bool RegistrarInscripcion(Inscripcion inscripcion)
         {
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
@@ -88,7 +85,6 @@ namespace ClaseBase
             }
         }
 
-        // Traer todos los alumnos
         public static DataTable TraerAlumnos()
         {
             DataTable tabla = new DataTable();
@@ -102,14 +98,13 @@ namespace ClaseBase
             return tabla;
         }
 
-        // Traer cursos programados
         public static DataTable TraerCursosProgramados()
         {
             DataTable tabla = new DataTable();
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
             {
                 cn.Open();
-                // Est_ID = 1 asumiendo que es "Programado"
+
                 SqlCommand cmd = new SqlCommand(
                     "SELECT c.Cur_ID, c.Cur_Nombre, c.Cur_Descripcion, c.Cur_Cupo, " +
                     "c.Cur_FechaInicio, c.Cur_FechaFin, e.Est_Nombre " +
@@ -124,7 +119,6 @@ namespace ClaseBase
             return tabla;
         }
 
-        // Traer todas las inscripciones
         public static DataTable TraerInscripciones()
         {
             DataTable tabla = new DataTable();
@@ -146,8 +140,6 @@ namespace ClaseBase
             }
             return tabla;
         }
-
-        // --- MÉTODOS NUEVOS AÑADIDOS PARA ANULAR INSCRIPCIÓN ---
 
         public static DataTable TraerInscripcionesActivasPorAlumno(int aluID)
         {
@@ -177,7 +169,6 @@ namespace ClaseBase
         {
             int estadoCanceladoID = TrabajarEstado.ObtenerEstadoID("Cancelado", "Inscripcion");
 
-            // 2. Actualizar la tabla Inscripcion
             using (SqlConnection cn = new SqlConnection(ClaseBase.Properties.Settings.Default.BDInstituto))
             {
                 cn.Open();
@@ -234,5 +225,120 @@ namespace ClaseBase
                 return filas > 0;
             }
         }
+
+        public static DataTable TraerInscripcionesFinalizadas(int aluID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                string query = @"
+            SELECT 
+                c.Cur_Nombre,
+                d.Doc_Nombre + ' ' + d.Doc_Apellido AS Docente,
+                i.Ins_Fecha AS FechaFinalizacion,
+                eCur.Est_Nombre AS EstadoCurso
+            FROM Inscripcion i
+            INNER JOIN Curso c ON i.Cur_ID = c.Cur_ID
+            INNER JOIN Docente d ON c.Doc_ID = d.Doc_ID
+            INNER JOIN Estado eIns ON i.Est_ID = eIns.Est_ID
+            INNER JOIN Estado eCur ON c.Est_ID = eCur.Est_ID
+            WHERE i.Alu_ID = @aluID
+              AND eCur.Est_Nombre = 'Finalizado'"; // Ajusta según tu lógica
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@aluID", aluID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        public static DataTable TraerInscripcionesEnCurso(int aluID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                string query = @"
+        SELECT 
+            C.Cur_Nombre AS Cur_Nombre,
+            D.Doc_Nombre + ' ' + D.Doc_Apellido AS Docente,
+            C.Cur_FechaFin AS FechaFinalizacion,
+            ECur.Est_Nombre AS EstadoCurso
+        FROM Inscripcion I
+        INNER JOIN Curso C ON I.Cur_ID = C.Cur_ID
+        INNER JOIN Docente D ON C.Doc_ID = D.Doc_ID
+        INNER JOIN Estado ECur ON C.Est_ID = ECur.Est_ID
+        WHERE I.Alu_ID = @aluID
+          AND ECur.Est_Nombre = 'En_Curso'
+        ORDER BY C.Cur_FechaFin";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@aluID", aluID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        public static DataTable TraerInscripcionesOtrosEstados(int aluID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                string query = @"
+            SELECT 
+                c.Cur_Nombre,
+                d.Doc_Nombre + ' ' + d.Doc_Apellido AS Docente,
+                i.Ins_Fecha AS FechaFinalizacion,
+                eCur.Est_Nombre AS EstadoCurso
+            FROM Inscripcion i
+            INNER JOIN Curso c ON i.Cur_ID = c.Cur_ID
+            INNER JOIN Docente d ON c.Doc_ID = d.Doc_ID
+            INNER JOIN Estado eIns ON i.Est_ID = eIns.Est_ID
+            INNER JOIN Estado eCur ON c.Est_ID = eCur.Est_ID
+            WHERE i.Alu_ID = @aluID
+              AND eCur.Est_Nombre NOT IN ('Finalizado', 'EnCurso')";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@aluID", aluID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        public static DataTable TraerInscripciones(int aluID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.BDInstituto))
+            {
+                cn.Open();
+                string query = @"
+        SELECT 
+            c.Cur_Nombre,
+            d.Doc_Nombre + ' ' + d.Doc_Apellido AS Docente,
+            i.Ins_Fecha AS FechaFinalizacion,
+            eCur.Est_Nombre AS EstadoCurso
+        FROM Inscripcion i
+        INNER JOIN Curso c ON i.Cur_ID = c.Cur_ID
+        INNER JOIN Docente d ON c.Doc_ID = d.Doc_ID
+        INNER JOIN Estado eCur ON c.Est_ID = eCur.Est_ID
+        WHERE i.Alu_ID = @aluID";
+
+                SqlCommand cmd = new SqlCommand(query, cn);
+                cmd.Parameters.AddWithValue("@aluID", aluID);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
     }
 }

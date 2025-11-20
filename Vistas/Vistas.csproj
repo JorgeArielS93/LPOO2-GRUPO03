@@ -73,6 +73,9 @@
     </Compile>
     <Compile Include="Resources\ConversorDeEstados.cs" />
     <Compile Include="Resources\ConversorNombreEstado.cs" />
+    <Compile Include="Resultado\Resultado.xaml.cs">
+      <DependentUpon>Resultado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usuario\AltaUsuario.xaml.cs">
       <DependentUpon>AltaUsuario.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inscripcion\frmInscripcion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resultado\Resultado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

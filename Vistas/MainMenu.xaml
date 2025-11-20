@@ -89,6 +89,8 @@
                     </MenuItem>
 
                     <MenuItem Header="_Reportes"></MenuItem>
+
+                    <MenuItem Header="Resultados" Click="MenuResultados_Click" Background="#2c3e50"/>
                 </Menu>
 
                 <Grid Background="White">
